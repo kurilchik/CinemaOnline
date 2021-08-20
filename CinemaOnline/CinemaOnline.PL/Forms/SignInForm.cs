@@ -16,5 +16,21 @@ namespace CinemaOnline.PL.Forms
         {
             InitializeComponent();
         }
+
+        private void _emailAddressTextBox_Leave(object sender, EventArgs e)
+        {
+            if (_emailAddressTextBox.Text.Trim() != string.Empty)
+            {
+                try
+                {
+                    var mailAddress = new System.Net.Mail.MailAddress(_emailAddressTextBox.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("E-mail address format is not correct.", "Email Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    _emailAddressTextBox.Focus();
+                }
+            }
+        }
     }
 }
