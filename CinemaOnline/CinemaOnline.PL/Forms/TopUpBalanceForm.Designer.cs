@@ -1,0 +1,123 @@
+﻿
+namespace CinemaOnline.PL.Forms
+{
+    partial class TopUpBalanceForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TopUpBalanceForm));
+            this._notificationLabel = new System.Windows.Forms.Label();
+            this._topUpButton = new System.Windows.Forms.Button();
+            this._topUpTextBox = new System.Windows.Forms.TextBox();
+            this._homePictureBox = new System.Windows.Forms.PictureBox();
+            this._accountTictureBox = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._accountTictureBox)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // _notificationLabel
+            // 
+            this._notificationLabel.AutoSize = true;
+            this._notificationLabel.ForeColor = System.Drawing.SystemColors.ControlText;
+            this._notificationLabel.Location = new System.Drawing.Point(11, 96);
+            this._notificationLabel.Name = "_notificationLabel";
+            this._notificationLabel.Size = new System.Drawing.Size(134, 20);
+            this._notificationLabel.TabIndex = 15;
+            this._notificationLabel.Text = "Enter card number:";
+            // 
+            // _topUpButton
+            // 
+            this._topUpButton.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this._topUpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this._topUpButton.Location = new System.Drawing.Point(0, 147);
+            this._topUpButton.Name = "_topUpButton";
+            this._topUpButton.Size = new System.Drawing.Size(481, 57);
+            this._topUpButton.TabIndex = 16;
+            this._topUpButton.Text = "TOP UP";
+            this._topUpButton.UseVisualStyleBackColor = true;
+            this._topUpButton.Click += new System.EventHandler(this._topUpButton_Click);
+            // 
+            // _topUpTextBox
+            // 
+            this._topUpTextBox.Location = new System.Drawing.Point(161, 93);
+            this._topUpTextBox.Name = "_topUpTextBox";
+            this._topUpTextBox.Size = new System.Drawing.Size(293, 27);
+            this._topUpTextBox.TabIndex = 17;
+            // 
+            // _homePictureBox
+            // 
+            this._homePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this._homePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_homePictureBox.Image")));
+            this._homePictureBox.Location = new System.Drawing.Point(12, 12);
+            this._homePictureBox.Name = "_homePictureBox";
+            this._homePictureBox.Size = new System.Drawing.Size(50, 50);
+            this._homePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._homePictureBox.TabIndex = 18;
+            this._homePictureBox.TabStop = false;
+            this._homePictureBox.Click += new System.EventHandler(this._homePictureBox_Click);
+            // 
+            // _accountTictureBox
+            // 
+            this._accountTictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this._accountTictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_accountTictureBox.Image")));
+            this._accountTictureBox.Location = new System.Drawing.Point(419, 12);
+            this._accountTictureBox.Name = "_accountTictureBox";
+            this._accountTictureBox.Size = new System.Drawing.Size(50, 50);
+            this._accountTictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._accountTictureBox.TabIndex = 19;
+            this._accountTictureBox.TabStop = false;
+            this._accountTictureBox.Click += new System.EventHandler(this._accountTictureBox_Click);
+            // 
+            // TopUpBalanceForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(481, 204);
+            this.Controls.Add(this._accountTictureBox);
+            this.Controls.Add(this._homePictureBox);
+            this.Controls.Add(this._topUpTextBox);
+            this.Controls.Add(this._topUpButton);
+            this.Controls.Add(this._notificationLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "TopUpBalanceForm";
+            this.Text = "Top Up Balance";
+            ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._accountTictureBox)).EndInit();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label _notificationLabel;
+        private System.Windows.Forms.Button _topUpButton;
+        private System.Windows.Forms.TextBox _topUpTextBox;
+        private System.Windows.Forms.PictureBox _homePictureBox;
+        private System.Windows.Forms.PictureBox _accountTictureBox;
+    }
+}

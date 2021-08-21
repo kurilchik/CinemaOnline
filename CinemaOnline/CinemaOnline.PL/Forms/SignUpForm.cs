@@ -16,5 +16,60 @@ namespace CinemaOnline.PL.Forms
         {
             InitializeComponent();
         }
+
+        private void _singUpButton_Click(object sender, EventArgs e)
+        {
+            var space = string.IsNullOrEmpty(_passwordTextBox.Text);
+
+            if (space)
+                MessageBox.Show("Invalid password!", "Pasword", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            if (Email() && Password() && !space)
+            {
+                MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Hide();
+                SignInForm signInForm = new SignInForm();
+                signInForm.Show();
+            }
+        }
+
+        private void _emailAddressTextBox_Leave(object sender, EventArgs e)
+        {
+            if (_emailAddressTextBox.Text.Trim() != string.Empty)
+            {
+                Email();
+            }
+        }
+
+        private bool Email()
+        {
+            try
+            {
+                var mailAddress = new System.Net.Mail.MailAddress(_emailAddressTextBox.Text);
+                return true;
+            }
+            catch
+            {
+                MessageBox.Show("E-mail address format is not correct.", "Email Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+        }
+
+        private void _passwordTextBox_Leave(object sender, EventArgs e)
+        {
+            Password();
+        }
+
+        private bool Password()
+        {
+            if (_passwordTextBox.Text.Contains(' '))
+            {
+                MessageBox.Show("Invalid password!", "Pasword", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else
+                return true;
+        }
     }
 }
