@@ -41,6 +41,7 @@ namespace CinemaOnline.PL.Forms
 
                 film.Click += (object sender, EventArgs e) => 
                 {
+                    this.Dispose();
                     this.Hide();
                     PaymentForm paymentForm = new PaymentForm(item);
                     paymentForm.Show();
@@ -50,6 +51,7 @@ namespace CinemaOnline.PL.Forms
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
+            this.Dispose();
             this.Hide();
             AccountForm accountForm = new AccountForm();
             accountForm.Show();

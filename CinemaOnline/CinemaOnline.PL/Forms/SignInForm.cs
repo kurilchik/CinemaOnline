@@ -19,12 +19,12 @@ namespace CinemaOnline.PL.Forms
 
         private void _singInButton_Click(object sender, EventArgs e)
         {
-            var space = string.IsNullOrEmpty(_passwordTextBox.Text);
+            var whiteSpace = string.IsNullOrEmpty(_passwordTextBox.Text);
 
-            if (space)
+            if (whiteSpace)
                 MessageBox.Show("Invalid password!", "Pasword", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            if (Email() && Password() && !space)
+            if (Email() && Password() && !whiteSpace)
             {
                 MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

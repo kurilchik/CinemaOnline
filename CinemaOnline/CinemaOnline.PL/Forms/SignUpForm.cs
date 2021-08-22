@@ -27,6 +27,7 @@ namespace CinemaOnline.PL.Forms
             if (Email() && Password() && !space)
             {
                 MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Dispose();
                 this.Hide();
                 SignInForm signInForm = new SignInForm();
                 signInForm.Show();

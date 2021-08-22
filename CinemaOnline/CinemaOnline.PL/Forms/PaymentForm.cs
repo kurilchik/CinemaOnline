@@ -28,6 +28,7 @@ namespace CinemaOnline.PL.Forms
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
+            this.Dispose();
             this.Hide();
             AccountForm accountForm = new AccountForm();
             accountForm.Show();
@@ -35,6 +36,7 @@ namespace CinemaOnline.PL.Forms
 
         private void _homePictureBox_Click(object sender, EventArgs e)
         {
+            this.Dispose();
             this.Hide();
             PreviewForm previewForm = new PreviewForm();
             previewForm.Show();
