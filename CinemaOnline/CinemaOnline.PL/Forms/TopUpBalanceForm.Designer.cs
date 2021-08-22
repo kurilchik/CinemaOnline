@@ -34,9 +34,9 @@ namespace CinemaOnline.PL.Forms
             this._topUpButton = new System.Windows.Forms.Button();
             this._topUpTextBox = new System.Windows.Forms.TextBox();
             this._homePictureBox = new System.Windows.Forms.PictureBox();
-            this._accountTictureBox = new System.Windows.Forms.PictureBox();
+            this._accountPictureBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this._accountTictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // _notificationLabel
@@ -80,24 +80,24 @@ namespace CinemaOnline.PL.Forms
             this._homePictureBox.TabStop = false;
             this._homePictureBox.Click += new System.EventHandler(this._homePictureBox_Click);
             // 
-            // _accountTictureBox
+            // _accountPictureBox
             // 
-            this._accountTictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._accountTictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_accountTictureBox.Image")));
-            this._accountTictureBox.Location = new System.Drawing.Point(419, 12);
-            this._accountTictureBox.Name = "_accountTictureBox";
-            this._accountTictureBox.Size = new System.Drawing.Size(50, 50);
-            this._accountTictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._accountTictureBox.TabIndex = 19;
-            this._accountTictureBox.TabStop = false;
-            this._accountTictureBox.Click += new System.EventHandler(this._accountTictureBox_Click);
+            this._accountPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this._accountPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_accountPictureBox.Image")));
+            this._accountPictureBox.Location = new System.Drawing.Point(419, 12);
+            this._accountPictureBox.Name = "_accountPictureBox";
+            this._accountPictureBox.Size = new System.Drawing.Size(50, 50);
+            this._accountPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this._accountPictureBox.TabIndex = 19;
+            this._accountPictureBox.TabStop = false;
+            this._accountPictureBox.Click += new System.EventHandler(this._accountTictureBox_Click);
             // 
             // TopUpBalanceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 204);
-            this.Controls.Add(this._accountTictureBox);
+            this.Controls.Add(this._accountPictureBox);
             this.Controls.Add(this._homePictureBox);
             this.Controls.Add(this._topUpTextBox);
             this.Controls.Add(this._topUpButton);
@@ -105,8 +105,9 @@ namespace CinemaOnline.PL.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "TopUpBalanceForm";
             this.Text = "Top Up Balance";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUpBalanceForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this._accountTictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -118,6 +119,6 @@ namespace CinemaOnline.PL.Forms
         private System.Windows.Forms.Button _topUpButton;
         private System.Windows.Forms.TextBox _topUpTextBox;
         private System.Windows.Forms.PictureBox _homePictureBox;
-        private System.Windows.Forms.PictureBox _accountTictureBox;
+        private System.Windows.Forms.PictureBox _accountPictureBox;
     }
 }

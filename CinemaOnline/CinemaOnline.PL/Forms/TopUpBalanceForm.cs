@@ -37,5 +37,10 @@ namespace CinemaOnline.PL.Forms
             AccountForm accountForm = new AccountForm();
             accountForm.Show();
         }
+
+        private void TopUpBalanceForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

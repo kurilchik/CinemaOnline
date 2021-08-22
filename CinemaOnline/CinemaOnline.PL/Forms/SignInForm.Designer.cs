@@ -130,6 +130,7 @@ namespace CinemaOnline.PL.Forms
             this.Name = "SignInForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sign In";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignInForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

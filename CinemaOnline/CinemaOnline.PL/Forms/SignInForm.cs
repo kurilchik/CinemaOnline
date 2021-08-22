@@ -27,10 +27,10 @@ namespace CinemaOnline.PL.Forms
             if (Email() && Password() && !space)
             {
                 MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide();
-                PreviewForm previewForm = new PreviewForm();
-                previewForm.Show();
 
+                this.Hide();
+                PreviewForm previewForm = new PreviewForm();              
+                previewForm.Show();
             }
         }
 
@@ -73,16 +73,16 @@ namespace CinemaOnline.PL.Forms
                 return true;
         }
 
-        private void _singUpButton_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void _signUpLabel_Click(object sender, EventArgs e)
         {
             this.Hide();
             SignUpForm signUpForm = new SignUpForm();
             signUpForm.Show();
+        }
+
+        private void SignInForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

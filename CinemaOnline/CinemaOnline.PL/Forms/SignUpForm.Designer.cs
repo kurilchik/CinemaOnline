@@ -95,7 +95,6 @@ namespace CinemaOnline.PL.Forms
             this._nameTextBox.Location = new System.Drawing.Point(135, 36);
             this._nameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._nameTextBox.Name = "_nameTextBox";
-            this._nameTextBox.PasswordChar = '*';
             this._nameTextBox.Size = new System.Drawing.Size(291, 27);
             this._nameTextBox.TabIndex = 13;
             // 
@@ -137,6 +136,7 @@ namespace CinemaOnline.PL.Forms
             this.Name = "SignUpForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Sign Up";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SignUpForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

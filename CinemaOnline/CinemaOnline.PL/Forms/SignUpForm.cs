@@ -71,5 +71,10 @@ namespace CinemaOnline.PL.Forms
             else
                 return true;
         }
+
+        private void SignUpForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
