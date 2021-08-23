@@ -30,7 +30,6 @@ namespace CinemaOnline.PL.Forms
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PaymentForm));
-            this._accountPictureBox = new System.Windows.Forms.PictureBox();
             this._homePictureBox = new System.Windows.Forms.PictureBox();
             this._filmPictureBox = new System.Windows.Forms.PictureBox();
             this._descriptionLabel = new System.Windows.Forms.Label();
@@ -44,22 +43,9 @@ namespace CinemaOnline.PL.Forms
             this._timeLabel = new System.Windows.Forms.Label();
             this._cinemaComboBox = new System.Windows.Forms.ComboBox();
             this._timeComboBox = new System.Windows.Forms.ComboBox();
-            ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._filmPictureBox)).BeginInit();
             this.SuspendLayout();
-            // 
-            // _accountPictureBox
-            // 
-            this._accountPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._accountPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_accountPictureBox.Image")));
-            this._accountPictureBox.Location = new System.Drawing.Point(746, 12);
-            this._accountPictureBox.Name = "_accountPictureBox";
-            this._accountPictureBox.Size = new System.Drawing.Size(50, 50);
-            this._accountPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._accountPictureBox.TabIndex = 21;
-            this._accountPictureBox.TabStop = false;
-            this._accountPictureBox.Click += new System.EventHandler(this._accountTictureBox_Click);
             // 
             // _homePictureBox
             // 
@@ -200,14 +186,12 @@ namespace CinemaOnline.PL.Forms
             this.Controls.Add(this._descriptionLabel);
             this.Controls.Add(this._nameLabel);
             this.Controls.Add(this._filmPictureBox);
-            this.Controls.Add(this._accountPictureBox);
             this.Controls.Add(this._homePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "PaymentForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaymentForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._filmPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -216,8 +200,6 @@ namespace CinemaOnline.PL.Forms
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox _accountPictureBox;
         private System.Windows.Forms.PictureBox _homePictureBox;
         private System.Windows.Forms.PictureBox _filmPictureBox;
         private System.Windows.Forms.Label _descriptionLabel;

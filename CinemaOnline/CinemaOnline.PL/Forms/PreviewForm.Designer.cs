@@ -51,9 +51,9 @@ namespace CinemaOnline.PL.Forms
             // 
             this._filmsFlowLayoutPanel.AutoScroll = true;
             this._filmsFlowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this._filmsFlowLayoutPanel.Location = new System.Drawing.Point(0, 84);
+            this._filmsFlowLayoutPanel.Location = new System.Drawing.Point(0, 126);
             this._filmsFlowLayoutPanel.Name = "_filmsFlowLayoutPanel";
-            this._filmsFlowLayoutPanel.Size = new System.Drawing.Size(1059, 483);
+            this._filmsFlowLayoutPanel.Size = new System.Drawing.Size(1059, 541);
             this._filmsFlowLayoutPanel.TabIndex = 22;
             this._filmsFlowLayoutPanel.WrapContents = false;
             // 
@@ -61,7 +61,7 @@ namespace CinemaOnline.PL.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1059, 567);
+            this.ClientSize = new System.Drawing.Size(1059, 667);
             this.Controls.Add(this._filmsFlowLayoutPanel);
             this.Controls.Add(this._accountPictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;

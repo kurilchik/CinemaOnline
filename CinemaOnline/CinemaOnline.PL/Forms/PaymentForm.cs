@@ -12,34 +12,23 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class PaymentForm : Form
     {
-        private string _url;
+        private PreviewForm _previewForm;
 
         public PaymentForm()
         {
             InitializeComponent();
         }
 
-        public PaymentForm(string url)
+        public PaymentForm(string url, PreviewForm previewForm) : this()
         {
-            InitializeComponent();
-            _url = url;
-            _filmPictureBox.ImageLocation = _url;
-        }
-
-        private void _accountTictureBox_Click(object sender, EventArgs e)
-        {
-            this.Dispose();
-            this.Hide();
-            AccountForm accountForm = new AccountForm();
-            accountForm.Show();
+            _filmPictureBox.ImageLocation = url;
+            _previewForm = previewForm;
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            this.Hide();
-            PreviewForm previewForm = new PreviewForm();
-            previewForm.Show();
+            Hide();
+            _previewForm.Show();
         }
 
         private void _payButton_Click(object sender, EventArgs e)

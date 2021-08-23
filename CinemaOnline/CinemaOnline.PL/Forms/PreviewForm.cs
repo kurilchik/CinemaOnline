@@ -12,9 +12,13 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class PreviewForm : Form
     {
+        private AccountForm _accountForm;
+
         public PreviewForm()
         {
             InitializeComponent();
+
+            _accountForm = new AccountForm(this);
 
             List<string> imgs = new List<string>()
             {
@@ -41,9 +45,8 @@ namespace CinemaOnline.PL.Forms
 
                 film.Click += (object sender, EventArgs e) => 
                 {
-                    this.Dispose();
-                    this.Hide();
-                    PaymentForm paymentForm = new PaymentForm(item);
+                    Hide();
+                    PaymentForm paymentForm = new PaymentForm(item, this);
                     paymentForm.Show();
                 };
             }
@@ -51,10 +54,8 @@ namespace CinemaOnline.PL.Forms
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            this.Hide();
-            AccountForm accountForm = new AccountForm();
-            accountForm.Show();
+            Hide();
+            _accountForm.Show();
         }
 
         private void PreviewForm_FormClosing(object sender, FormClosingEventArgs e)

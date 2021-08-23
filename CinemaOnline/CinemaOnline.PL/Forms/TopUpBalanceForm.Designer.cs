@@ -33,9 +33,7 @@ namespace CinemaOnline.PL.Forms
             this._notificationLabel = new System.Windows.Forms.Label();
             this._topUpButton = new System.Windows.Forms.Button();
             this._topUpTextBox = new System.Windows.Forms.TextBox();
-            this._homePictureBox = new System.Windows.Forms.PictureBox();
             this._accountPictureBox = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,18 +66,6 @@ namespace CinemaOnline.PL.Forms
             this._topUpTextBox.Size = new System.Drawing.Size(293, 27);
             this._topUpTextBox.TabIndex = 17;
             // 
-            // _homePictureBox
-            // 
-            this._homePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this._homePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_homePictureBox.Image")));
-            this._homePictureBox.Location = new System.Drawing.Point(12, 12);
-            this._homePictureBox.Name = "_homePictureBox";
-            this._homePictureBox.Size = new System.Drawing.Size(50, 50);
-            this._homePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this._homePictureBox.TabIndex = 18;
-            this._homePictureBox.TabStop = false;
-            this._homePictureBox.Click += new System.EventHandler(this._homePictureBox_Click);
-            // 
             // _accountPictureBox
             // 
             this._accountPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -98,7 +84,6 @@ namespace CinemaOnline.PL.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 204);
             this.Controls.Add(this._accountPictureBox);
-            this.Controls.Add(this._homePictureBox);
             this.Controls.Add(this._topUpTextBox);
             this.Controls.Add(this._topUpButton);
             this.Controls.Add(this._notificationLabel);
@@ -106,7 +91,6 @@ namespace CinemaOnline.PL.Forms
             this.Name = "TopUpBalanceForm";
             this.Text = "Top Up Balance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUpBalanceForm_FormClosing);
-            ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -118,7 +102,6 @@ namespace CinemaOnline.PL.Forms
         private System.Windows.Forms.Label _notificationLabel;
         private System.Windows.Forms.Button _topUpButton;
         private System.Windows.Forms.TextBox _topUpTextBox;
-        private System.Windows.Forms.PictureBox _homePictureBox;
         private System.Windows.Forms.PictureBox _accountPictureBox;
     }
 }

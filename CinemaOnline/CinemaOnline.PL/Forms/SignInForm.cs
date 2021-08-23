@@ -12,9 +12,12 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignInForm : Form
     {
+        private SignUpForm _signUpForm;
+
         public SignInForm()
         {
             InitializeComponent();
+            _signUpForm = new SignUpForm(this);
         }
 
         private void _singInButton_Click(object sender, EventArgs e)
@@ -28,7 +31,7 @@ namespace CinemaOnline.PL.Forms
             {
                 MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                this.Hide();
+                Hide();
                 PreviewForm previewForm = new PreviewForm();              
                 previewForm.Show();
             }
@@ -75,9 +78,8 @@ namespace CinemaOnline.PL.Forms
 
         private void _signUpLabel_Click(object sender, EventArgs e)
         {
-            this.Hide();
-            SignUpForm signUpForm = new SignUpForm();
-            signUpForm.Show();
+            Hide();
+            _signUpForm.Show();
         }
 
         private void SignInForm_FormClosing(object sender, FormClosingEventArgs e)

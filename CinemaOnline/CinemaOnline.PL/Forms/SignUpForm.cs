@@ -12,9 +12,16 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignUpForm : Form
     {
+        private SignInForm _signInForm;
+
         public SignUpForm()
         {
             InitializeComponent();
+        }
+
+        public SignUpForm(SignInForm signInForm) : this()
+        {
+            _signInForm = signInForm;
         }
 
         private void _singUpButton_Click(object sender, EventArgs e)
@@ -27,10 +34,8 @@ namespace CinemaOnline.PL.Forms
             if (Email() && Password() && !space)
             {
                 MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Dispose();
-                this.Hide();
-                SignInForm signInForm = new SignInForm();
-                signInForm.Show();
+                Hide();
+                _signInForm.Show();
             }
         }
 

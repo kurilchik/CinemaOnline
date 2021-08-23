@@ -12,33 +12,29 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class TopUpBalanceForm : Form
     {
+        private AccountForm _accountForm;
+
         public TopUpBalanceForm()
         {
             InitializeComponent();
         }
 
-        private void _topUpButton_Click(object sender, EventArgs e)
+        public TopUpBalanceForm(AccountForm accountForm) : this()
         {
-            this.Dispose();
-            this.Hide();
-            AccountForm accountForm = new AccountForm();
-            accountForm.Show();
+            _accountForm = accountForm;
         }
 
-        private void _homePictureBox_Click(object sender, EventArgs e)
+        private void _topUpButton_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            this.Hide();
-            PreviewForm previewForm = new PreviewForm();
-            previewForm.Show();
+            Hide();
+            _accountForm.Show();
         }
+
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
-            this.Dispose();
-            this.Hide();
-            AccountForm accountForm = new AccountForm();
-            accountForm.Show();
+            Hide();
+            _accountForm.Show();
         }
 
         private void TopUpBalanceForm_FormClosing(object sender, FormClosingEventArgs e)
