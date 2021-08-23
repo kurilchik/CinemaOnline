@@ -38,11 +38,12 @@ namespace CinemaOnline.PL.Forms
             this._nameTextBox = new System.Windows.Forms.TextBox();
             this._nameLabel = new System.Windows.Forms.Label();
             this._notificationLabel = new System.Windows.Forms.Label();
+            this._signInLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // _passwordTextBox
             // 
-            this._passwordTextBox.Location = new System.Drawing.Point(135, 187);
+            this._passwordTextBox.Location = new System.Drawing.Point(135, 237);
             this._passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._passwordTextBox.Name = "_passwordTextBox";
             this._passwordTextBox.PasswordChar = '*';
@@ -51,7 +52,7 @@ namespace CinemaOnline.PL.Forms
             // 
             // _emailAddressTextBox
             // 
-            this._emailAddressTextBox.Location = new System.Drawing.Point(135, 109);
+            this._emailAddressTextBox.Location = new System.Drawing.Point(135, 159);
             this._emailAddressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._emailAddressTextBox.Name = "_emailAddressTextBox";
             this._emailAddressTextBox.Size = new System.Drawing.Size(291, 27);
@@ -60,7 +61,7 @@ namespace CinemaOnline.PL.Forms
             // _passwordLabel
             // 
             this._passwordLabel.AutoSize = true;
-            this._passwordLabel.Location = new System.Drawing.Point(16, 194);
+            this._passwordLabel.Location = new System.Drawing.Point(16, 244);
             this._passwordLabel.Name = "_passwordLabel";
             this._passwordLabel.Size = new System.Drawing.Size(83, 20);
             this._passwordLabel.TabIndex = 8;
@@ -69,7 +70,7 @@ namespace CinemaOnline.PL.Forms
             // _emailAddressLabel
             // 
             this._emailAddressLabel.AutoSize = true;
-            this._emailAddressLabel.Location = new System.Drawing.Point(13, 116);
+            this._emailAddressLabel.Location = new System.Drawing.Point(13, 166);
             this._emailAddressLabel.Name = "_emailAddressLabel";
             this._emailAddressLabel.Size = new System.Drawing.Size(114, 20);
             this._emailAddressLabel.TabIndex = 7;
@@ -81,7 +82,7 @@ namespace CinemaOnline.PL.Forms
             this._singUpButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._singUpButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._singUpButton.ForeColor = System.Drawing.Color.White;
-            this._singUpButton.Location = new System.Drawing.Point(0, 318);
+            this._singUpButton.Location = new System.Drawing.Point(0, 384);
             this._singUpButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._singUpButton.Name = "_singUpButton";
             this._singUpButton.Size = new System.Drawing.Size(438, 67);
@@ -92,7 +93,7 @@ namespace CinemaOnline.PL.Forms
             // 
             // _nameTextBox
             // 
-            this._nameTextBox.Location = new System.Drawing.Point(135, 36);
+            this._nameTextBox.Location = new System.Drawing.Point(135, 86);
             this._nameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this._nameTextBox.Name = "_nameTextBox";
             this._nameTextBox.Size = new System.Drawing.Size(291, 27);
@@ -101,7 +102,7 @@ namespace CinemaOnline.PL.Forms
             // _nameLabel
             // 
             this._nameLabel.AutoSize = true;
-            this._nameLabel.Location = new System.Drawing.Point(16, 43);
+            this._nameLabel.Location = new System.Drawing.Point(16, 93);
             this._nameLabel.Name = "_nameLabel";
             this._nameLabel.Size = new System.Drawing.Size(52, 20);
             this._nameLabel.TabIndex = 12;
@@ -111,17 +112,30 @@ namespace CinemaOnline.PL.Forms
             // 
             this._notificationLabel.AutoSize = true;
             this._notificationLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this._notificationLabel.Location = new System.Drawing.Point(16, 259);
+            this._notificationLabel.Location = new System.Drawing.Point(16, 309);
             this._notificationLabel.Name = "_notificationLabel";
             this._notificationLabel.Size = new System.Drawing.Size(109, 20);
             this._notificationLabel.TabIndex = 14;
             this._notificationLabel.Text = "* required field";
             // 
+            // _signInLabel
+            // 
+            this._signInLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this._signInLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
+            this._signInLabel.ForeColor = System.Drawing.Color.Navy;
+            this._signInLabel.Location = new System.Drawing.Point(173, 23);
+            this._signInLabel.Name = "_signInLabel";
+            this._signInLabel.Size = new System.Drawing.Size(63, 20);
+            this._signInLabel.TabIndex = 15;
+            this._signInLabel.Text = "Sign in";
+            this._signInLabel.Click += new System.EventHandler(this._signInLabel_Click);
+            // 
             // SignUpForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 385);
+            this.ClientSize = new System.Drawing.Size(438, 451);
+            this.Controls.Add(this._signInLabel);
             this.Controls.Add(this._notificationLabel);
             this.Controls.Add(this._nameTextBox);
             this.Controls.Add(this._nameLabel);
@@ -152,5 +166,6 @@ namespace CinemaOnline.PL.Forms
         private System.Windows.Forms.TextBox _nameTextBox;
         private System.Windows.Forms.Label _nameLabel;
         private System.Windows.Forms.Label _notificationLabel;
+        private System.Windows.Forms.Label _signInLabel;
     }
 }

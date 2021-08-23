@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.BLL.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,11 +15,16 @@ namespace CinemaOnline.PL.Forms
     public partial class SignInForm : Form
     {
         private SignUpForm _signUpForm;
+        private UserViewModel _user;
+        private IUserService _userService;
 
         public SignInForm()
         {
             InitializeComponent();
+
+            _user = new UserViewModel();
             _signUpForm = new SignUpForm(this);
+            _userService = new UserService();
         }
 
         private void _singInButton_Click(object sender, EventArgs e)
@@ -29,11 +36,17 @@ namespace CinemaOnline.PL.Forms
 
             if (Email() && Password() && !whiteSpace)
             {
-                MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var user = _userService.GetByEmail(_emailAddressTextBox.Text);
+                if (user != null && user.Email == _emailAddressTextBox.Text && user.Password == _passwordTextBox.Text)
+                {
+                    MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Hide();
-                PreviewForm previewForm = new PreviewForm();              
-                previewForm.Show();
+                    Hide();
+                    PreviewForm previewForm = new PreviewForm() { User = _user };
+                    previewForm.Show();
+                }
+                else
+                    MessageBox.Show("Incorrect login or password!", "Sign in", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

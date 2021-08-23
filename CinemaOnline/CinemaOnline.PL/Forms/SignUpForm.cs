@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.BLL.ViewModels;
+using System;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL.Forms
@@ -13,6 +8,7 @@ namespace CinemaOnline.PL.Forms
     public partial class SignUpForm : Form
     {
         private SignInForm _signInForm;
+        private IUserService _userService;
 
         public SignUpForm()
         {
@@ -21,6 +17,7 @@ namespace CinemaOnline.PL.Forms
 
         public SignUpForm(SignInForm signInForm) : this()
         {
+            _userService = new UserService();
             _signInForm = signInForm;
         }
 
@@ -33,9 +30,24 @@ namespace CinemaOnline.PL.Forms
 
             if (Email() && Password() && !space)
             {
-                MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Hide();
-                _signInForm.Show();
+                var user = new UserViewModel()
+                {
+                    Email = _emailAddressTextBox.Text,
+                    Password = _passwordTextBox.Text,
+                    Name = _nameTextBox.Text
+                };
+
+                if (_userService.GetByEmail(_emailAddressTextBox.Text) == null)
+                {
+                    _userService.Add(user);
+
+                    MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    Hide();
+                    _signInForm.Show();
+                }
+                else
+                    MessageBox.Show($"{_emailAddressTextBox.Text} already registered!", "Email", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -78,9 +90,15 @@ namespace CinemaOnline.PL.Forms
                 return true;
         }
 
+        private void _signInLabel_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _signInForm.Show();
+        }
+
         private void SignUpForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
-        }
+        }       
     }
 }

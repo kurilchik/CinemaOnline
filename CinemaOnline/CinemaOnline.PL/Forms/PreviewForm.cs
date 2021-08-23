@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaOnline.BLL.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,13 @@ namespace CinemaOnline.PL.Forms
     {
         private AccountForm _accountForm;
 
+        public UserViewModel User { get; set; }
+
         public PreviewForm()
         {
             InitializeComponent();
 
+            User = new UserViewModel();
             _accountForm = new AccountForm(this);
 
             List<string> imgs = new List<string>()
