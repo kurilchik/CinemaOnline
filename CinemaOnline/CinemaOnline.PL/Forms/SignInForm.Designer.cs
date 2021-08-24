@@ -88,6 +88,7 @@ namespace CinemaOnline.PL.Forms
             this._emailAddressTextBox.Name = "_emailAddressTextBox";
             this._emailAddressTextBox.Size = new System.Drawing.Size(291, 27);
             this._emailAddressTextBox.TabIndex = 5;
+            this._emailAddressTextBox.Text = "andrew@mail.com";
             this._emailAddressTextBox.Leave += new System.EventHandler(this._emailAddressTextBox_Leave);
             // 
             // _passwordTextBox
@@ -98,6 +99,7 @@ namespace CinemaOnline.PL.Forms
             this._passwordTextBox.PasswordChar = '*';
             this._passwordTextBox.Size = new System.Drawing.Size(291, 27);
             this._passwordTextBox.TabIndex = 6;
+            this._passwordTextBox.Text = "12345";
             this._passwordTextBox.Leave += new System.EventHandler(this._passwordTextBox_Leave);
             // 
             // _signUpLabel

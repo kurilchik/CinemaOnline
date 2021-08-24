@@ -21,9 +21,13 @@ namespace CinemaOnline.DAL.Repositories
 
         public void Add(UserModel userModel)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserModel, User>());
-            var mapper = new Mapper(config);
-            var user = mapper.Map<UserModel, User>(userModel);
+            var user = new User()
+            {
+                Name = userModel.Name,
+                Email = userModel.Email,
+                Password = userModel.Password,
+                Balance = userModel.Balance
+            };
 
             _ticketDbContext.Users.Add(user);
         }
@@ -36,6 +40,12 @@ namespace CinemaOnline.DAL.Repositories
             var mapper = new Mapper(config);
             var userModel = mapper.Map<User, UserModel>(user);
             return userModel;
+        }
+
+        public void Update(UserModel userModel)
+        {
+            var user = _ticketDbContext.Users.FirstOrDefault(u => u.Email == userModel.Email);
+            user.Balance = userModel.Balance;
         }
     }
 }

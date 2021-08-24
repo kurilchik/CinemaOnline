@@ -32,11 +32,8 @@ namespace CinemaOnline.DAL.Repositories
 
         public void Update(TopUpCardModel topUpCardModel)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<TopUpCardModel, TopUpCard>());
-            var mapper = new Mapper(config);
-            var topUpCard = mapper.Map<TopUpCardModel, TopUpCard>(topUpCardModel);
-
-            _ticketDbContext.TopUpCards.Update(topUpCard);
+            var card = _ticketDbContext.TopUpCards.FirstOrDefault(c => c.Card == topUpCardModel.Card);
+            card.Used = topUpCardModel.Used;
         }
     }
 }

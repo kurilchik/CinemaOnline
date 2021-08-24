@@ -10,7 +10,7 @@ namespace CinemaOnline.BLL.Services.Interfaces
     public interface IUserService
     {
         void Add(UserViewModel userViewModel);
-
         UserViewModel GetByEmail(string email);
+        void Update(UserViewModel userViewModel);
     }
 }

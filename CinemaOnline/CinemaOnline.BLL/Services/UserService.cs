@@ -43,5 +43,15 @@ namespace CinemaOnline.BLL.Services
             var userViewModel = mapper.Map<UserModel, UserViewModel>(user);
             return userViewModel;
         }
+
+        public void Update(UserViewModel userViewModel)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserViewModel, UserModel>());
+            var mapper = new Mapper(config);
+            var userModel = mapper.Map<UserViewModel, UserModel>(userViewModel);
+
+            _userRepository.Update(userModel);
+            _ticketDbContext.SaveChanges();
+        }
     }
 }

@@ -24,7 +24,10 @@ namespace CinemaOnline.PL.Forms
         {
             _filmPictureBox.ImageLocation = film.ImgUrl;
             _previewForm = previewForm;
-            this.Text = film.Name;
+            Text = film.Name;
+            _nameTextLabel.Text = film.Name;
+            _descriptionTextLabel.Text = film.Description;
+            _genreTextLabel.Text = string.Join(", ", film.Genres);
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)

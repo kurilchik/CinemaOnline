@@ -10,7 +10,7 @@ namespace CinemaOnline.DAL.Repositories.Interfaces
     public interface IUserRepository
     {
         void Add(UserModel userModel);
-
         UserModel GetByEmail(string email);
+        void Update(UserModel userModel);
     }
 }

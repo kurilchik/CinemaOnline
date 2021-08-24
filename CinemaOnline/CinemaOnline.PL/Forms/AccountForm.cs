@@ -1,4 +1,6 @@
-﻿using CinemaOnline.BLL.ViewModels;
+﻿using CinemaOnline.BLL.Services;
+using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.BLL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,11 +18,13 @@ namespace CinemaOnline.PL.Forms
         private PreviewForm _previewForm;
         private TopUpBalanceForm _topUpBalanceForm;
         private UserViewModel _user;
+        private IUserService _userService;
 
         public AccountForm()
         {
             InitializeComponent();
             _topUpBalanceForm = new TopUpBalanceForm(this);
+            _userService = new UserService();
         }
 
         public AccountForm(PreviewForm previewForm, UserViewModel user) : this()
@@ -37,6 +41,7 @@ namespace CinemaOnline.PL.Forms
         public void TopUpBalance(float amount)
         {
             _user.Balance += amount;
+            _userService.Update(_user);
             _balanceTextBox.Text = _user.Balance.ToString();
         }
 

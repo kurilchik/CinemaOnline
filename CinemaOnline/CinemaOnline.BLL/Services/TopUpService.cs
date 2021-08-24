@@ -44,7 +44,7 @@ namespace CinemaOnline.BLL.Services
         {
             var card = topUpCardModel;
             card.Used = true;
-            //_topUpRepository.Update(card);
+            _topUpRepository.Update(card);
             _ticketDbContext.SaveChanges();
         }
     }
