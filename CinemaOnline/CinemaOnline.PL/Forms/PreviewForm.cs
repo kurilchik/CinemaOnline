@@ -1,4 +1,6 @@
-﻿using CinemaOnline.BLL.ViewModels;
+﻿using CinemaOnline.BLL.Services;
+using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.BLL.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,6 +17,8 @@ namespace CinemaOnline.PL.Forms
     {
         private AccountForm _accountForm;
         private UserViewModel _user;
+        private List<FilmViewModel> _films;
+        private IFilmService _filmService;
 
         public PreviewForm()
         {
@@ -25,31 +29,24 @@ namespace CinemaOnline.PL.Forms
         {
             _user = user;
             _accountForm = new AccountForm(this, _user);
+            _filmService = new FilmService();
+            _films = new List<FilmViewModel>();
 
             ViewFilms();
         }
 
         private void ViewFilms()
         {
-            List<string> imgs = new List<string>()
-            {
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/349Sl3h3g.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/9Pg1NEMup.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/5ZdyNlmVF.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/2hSk7hhNp.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/349Sl3h3g.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/9Pg1NEMup.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/5ZdyNlmVF.jpg",
-                "https://abws.bycard.by/uploads/events/thumbs/300x430/2hSk7hhNp.jpg"
-            };
+            _films = _filmService.GetAllFilms();
 
-            foreach (var item in imgs)
+
+            foreach (var item in _films)
             {
                 var film = new PictureBox()
                 {
                     Size = new Size(300, 430),
                     SizeMode = PictureBoxSizeMode.Zoom,
-                    ImageLocation = item
+                    ImageLocation = item.ImgUrl
                 };
 
                 _filmsFlowLayoutPanel.Controls.Add(film);

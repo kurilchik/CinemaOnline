@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaOnline.BLL.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,10 +20,11 @@ namespace CinemaOnline.PL.Forms
             InitializeComponent();
         }
 
-        public PaymentForm(string url, PreviewForm previewForm) : this()
+        public PaymentForm(FilmViewModel film, PreviewForm previewForm) : this()
         {
-            _filmPictureBox.ImageLocation = url;
+            _filmPictureBox.ImageLocation = film.ImgUrl;
             _previewForm = previewForm;
+            this.Text = film.Name;
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)
