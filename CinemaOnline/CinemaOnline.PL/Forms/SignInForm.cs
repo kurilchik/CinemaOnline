@@ -1,4 +1,5 @@
-﻿using CinemaOnline.BLL.Services.Interfaces;
+﻿using CinemaOnline.BLL.Services;
+using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -42,7 +43,7 @@ namespace CinemaOnline.PL.Forms
                     MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
-                    PreviewForm previewForm = new PreviewForm() { User = _user };
+                    PreviewForm previewForm = new PreviewForm(user);
                     previewForm.Show();
                 }
                 else

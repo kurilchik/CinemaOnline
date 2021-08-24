@@ -14,15 +14,17 @@ namespace CinemaOnline.PL.Forms
     public partial class PreviewForm : Form
     {
         private AccountForm _accountForm;
-
-        public UserViewModel User { get; set; }
+        private UserViewModel _user;
 
         public PreviewForm()
         {
-            InitializeComponent();
+            InitializeComponent();     
+        }
 
-            User = new UserViewModel();
-            _accountForm = new AccountForm(this);
+        public PreviewForm(UserViewModel user) : this()
+        {
+            _user = user;
+            _accountForm = new AccountForm(this, _user);
 
             List<string> imgs = new List<string>()
             {
@@ -47,7 +49,7 @@ namespace CinemaOnline.PL.Forms
 
                 _filmsFlowLayoutPanel.Controls.Add(film);
 
-                film.Click += (object sender, EventArgs e) => 
+                film.Click += (object sender, EventArgs e) =>
                 {
                     Hide();
                     PaymentForm paymentForm = new PaymentForm(item, this);

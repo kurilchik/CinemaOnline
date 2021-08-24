@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaOnline.BLL.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +15,7 @@ namespace CinemaOnline.PL.Forms
     {
         private PreviewForm _previewForm;
         private TopUpBalanceForm _topUpBalanceForm;
+        private UserViewModel _user;
 
         public AccountForm()
         {
@@ -21,9 +23,15 @@ namespace CinemaOnline.PL.Forms
             _topUpBalanceForm = new TopUpBalanceForm(this);
         }
 
-        public AccountForm(PreviewForm previewForm) : this()
+        public AccountForm(PreviewForm previewForm, UserViewModel user) : this()
         {
             _previewForm = previewForm;
+            _user = user;
+
+            _nameTextBox.Text = _user.Name;
+            _emailAddressTextBox.Text = _user.Email;
+            _passwordTextBox.Text = _user.Password;
+            _balanceTextBox.Text = _user.Balance.ToString();
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)

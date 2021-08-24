@@ -41,38 +41,43 @@ namespace CinemaOnline.PL.Forms
             // 
             this._notificationLabel.AutoSize = true;
             this._notificationLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._notificationLabel.Location = new System.Drawing.Point(11, 96);
+            this._notificationLabel.Location = new System.Drawing.Point(10, 72);
             this._notificationLabel.Name = "_notificationLabel";
-            this._notificationLabel.Size = new System.Drawing.Size(134, 20);
+            this._notificationLabel.Size = new System.Drawing.Size(108, 15);
             this._notificationLabel.TabIndex = 15;
             this._notificationLabel.Text = "Enter card number:";
             // 
             // _topUpButton
             // 
+            this._topUpButton.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this._topUpButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._topUpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this._topUpButton.Location = new System.Drawing.Point(0, 147);
+            this._topUpButton.Location = new System.Drawing.Point(0, 110);
+            this._topUpButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._topUpButton.Name = "_topUpButton";
-            this._topUpButton.Size = new System.Drawing.Size(481, 57);
+            this._topUpButton.Size = new System.Drawing.Size(421, 43);
             this._topUpButton.TabIndex = 16;
             this._topUpButton.Text = "TOP UP";
-            this._topUpButton.UseVisualStyleBackColor = true;
+            this._topUpButton.UseVisualStyleBackColor = false;
             this._topUpButton.Click += new System.EventHandler(this._topUpButton_Click);
             // 
             // _topUpTextBox
             // 
-            this._topUpTextBox.Location = new System.Drawing.Point(161, 93);
+            this._topUpTextBox.Location = new System.Drawing.Point(141, 70);
+            this._topUpTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._topUpTextBox.Name = "_topUpTextBox";
-            this._topUpTextBox.Size = new System.Drawing.Size(293, 27);
+            this._topUpTextBox.Size = new System.Drawing.Size(257, 23);
             this._topUpTextBox.TabIndex = 17;
             // 
             // _accountPictureBox
             // 
+            this._accountPictureBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this._accountPictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this._accountPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_accountPictureBox.Image")));
-            this._accountPictureBox.Location = new System.Drawing.Point(419, 12);
+            this._accountPictureBox.Location = new System.Drawing.Point(367, 9);
+            this._accountPictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._accountPictureBox.Name = "_accountPictureBox";
-            this._accountPictureBox.Size = new System.Drawing.Size(50, 50);
+            this._accountPictureBox.Size = new System.Drawing.Size(44, 38);
             this._accountPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this._accountPictureBox.TabIndex = 19;
             this._accountPictureBox.TabStop = false;
@@ -80,14 +85,15 @@ namespace CinemaOnline.PL.Forms
             // 
             // TopUpBalanceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 204);
+            this.ClientSize = new System.Drawing.Size(421, 153);
             this.Controls.Add(this._accountPictureBox);
             this.Controls.Add(this._topUpTextBox);
             this.Controls.Add(this._topUpButton);
             this.Controls.Add(this._notificationLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TopUpBalanceForm";
             this.Text = "Top Up Balance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUpBalanceForm_FormClosing);

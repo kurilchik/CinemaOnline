@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
@@ -10,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CinemaOnline.BLL.Services.Interfaces
+namespace CinemaOnline.BLL.Services
 {
     public class UserService : IUserService
     {

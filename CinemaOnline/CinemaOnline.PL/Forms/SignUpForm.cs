@@ -1,5 +1,6 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
+using CinemaOnline.BLL.Services;
 using System;
 using System.Windows.Forms;
 
@@ -7,6 +8,7 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignUpForm : Form
     {
+        private const int GIFT = 30;
         private SignInForm _signInForm;
         private IUserService _userService;
 
@@ -39,9 +41,11 @@ namespace CinemaOnline.PL.Forms
 
                 if (_userService.GetByEmail(_emailAddressTextBox.Text) == null)
                 {
+                    user.Balance = GIFT;
+
                     _userService.Add(user);
 
-                    MessageBox.Show("Registration successful!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Registration successful!\nGift for registration {user.Balance} BYN.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
                     _signInForm.Show();
