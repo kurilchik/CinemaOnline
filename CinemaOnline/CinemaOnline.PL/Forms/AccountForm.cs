@@ -34,6 +34,12 @@ namespace CinemaOnline.PL.Forms
             _balanceTextBox.Text = _user.Balance.ToString();
         }
 
+        public void TopUpBalance(float amount)
+        {
+            _user.Balance += amount;
+            _balanceTextBox.Text = _user.Balance.ToString();
+        }
+
         private void _homePictureBox_Click(object sender, EventArgs e)
         {
             Hide();

@@ -26,6 +26,11 @@ namespace CinemaOnline.PL.Forms
             _user = user;
             _accountForm = new AccountForm(this, _user);
 
+            ViewFilms();
+        }
+
+        private void ViewFilms()
+        {
             List<string> imgs = new List<string>()
             {
                 "https://abws.bycard.by/uploads/events/thumbs/300x430/349Sl3h3g.jpg",

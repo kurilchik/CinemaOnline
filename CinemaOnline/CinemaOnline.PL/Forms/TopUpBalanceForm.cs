@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CinemaOnline.BLL.Services;
+using CinemaOnline.BLL.Services.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,7 @@ namespace CinemaOnline.PL.Forms
     public partial class TopUpBalanceForm : Form
     {
         private AccountForm _accountForm;
+        private ITopUpService _topUpService;
 
         public TopUpBalanceForm()
         {
@@ -22,12 +25,22 @@ namespace CinemaOnline.PL.Forms
         public TopUpBalanceForm(AccountForm accountForm) : this()
         {
             _accountForm = accountForm;
+            _topUpService = new TopUpService();
         }
 
         private void _topUpButton_Click(object sender, EventArgs e)
         {
-            Hide();
-            _accountForm.Show();
+            var amount = _topUpService.TopUpCard(_topUpTextBox.Text);
+
+            if (amount > 0)
+            {
+                _accountForm.TopUpBalance(amount);
+                Hide();
+                _accountForm.Show();
+            }
+            else
+                MessageBox.Show("Invalid card!", "Card", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
 
