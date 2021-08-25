@@ -17,11 +17,13 @@ namespace CinemaOnline.BLL.Services
     {
         private TicketDbContext _ticketDbContext;
         private IFilmRepository _filmRepository;
+        private ISessionRepository _sessionRepository;
 
         public FilmService()
         {
             _ticketDbContext = new TicketDbContext();
             _filmRepository = new FilmRepository(_ticketDbContext);
+            _sessionRepository = new SessionRepository(_ticketDbContext);
         }
 
         public List<FilmViewModel> GetAllFilms()
@@ -31,6 +33,20 @@ namespace CinemaOnline.BLL.Services
             var films = mapper.Map<List<FilmViewModel>>(_filmRepository.GetAllFilms());
 
             return films;
+        }
+        public FilmViewModel GetSessions(FilmViewModel film)
+        {
+            film.Sessions = GetSessionByFilmId(film.Id);
+            return film;
+        }
+
+        private List<SessionViewModel> GetSessionByFilmId(int filmId)
+        {
+            var config = new MapperConfiguration(cfg => cfg.CreateMap<SessionModel, SessionViewModel>());
+            var mapper = new Mapper(config);
+            var sessions = mapper.Map<List<SessionViewModel>>(_sessionRepository.GetListSessionsByFilmId(filmId));
+
+            return sessions;
         }
     }
 }

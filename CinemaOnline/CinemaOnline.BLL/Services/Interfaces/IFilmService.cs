@@ -10,6 +10,8 @@ namespace CinemaOnline.BLL.Services.Interfaces
     public interface IFilmService
     {
         List<FilmViewModel> GetAllFilms();
-        
+        FilmViewModel GetSessions(FilmViewModel film);
+
+
     }
 }

@@ -20,29 +20,12 @@ namespace CinemaOnline.DAL.Repositories
 
         public List<FilmModel> GetAllFilms()
         {
-            //var films = (from film in _ticketDbContext.Films
-            //            select new FilmModel
-            //            {
-            //                Id = film.Id,
-            //                Name = film.Name,
-            //                Description = film.Description,
-            //                ImgUrl = film.ImgUrl,
-
-            //            }).ToList();
-
-            //var filmsGenres = (from filmGenre in _ticketDbContext.FilmGenres
-            //                   join genre in _ticketDbContext.Genres on filmGenre.GenreId equals genre.Id
-            //                   select new
-            //                   {
-            //                       FilmId = filmGenre.FilmId,
-            //                       Genre = genre.Name
-            //                   }).ToList();
-
             var groups = (from filmGenre in _ticketDbContext.FilmGenres
                          join genre in _ticketDbContext.Genres on filmGenre.GenreId equals genre.Id
                          join film in _ticketDbContext.Films on filmGenre.FilmId equals film.Id
                          select new
                          {
+                             Id = film.Id,
                              Film = film.Name,
                              Description = film.Description,
                              ImgUrl = film.ImgUrl,
@@ -52,6 +35,7 @@ namespace CinemaOnline.DAL.Repositories
             var films = groups.GroupBy(f => f.Film).Select(x => new FilmModel()
             {
                 Name = x.Key,
+                Id = x.First().Id,
                 Description = x.First().Description,
                 ImgUrl = x.First().ImgUrl,
                 Genres = x.Select(g => g.Genre).ToList()

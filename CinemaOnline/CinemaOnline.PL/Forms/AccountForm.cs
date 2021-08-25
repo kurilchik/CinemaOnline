@@ -19,12 +19,14 @@ namespace CinemaOnline.PL.Forms
         private TopUpBalanceForm _topUpBalanceForm;
         private UserViewModel _user;
         private IUserService _userService;
+        private ITicketService _ticketService;
 
         public AccountForm()
         {
             InitializeComponent();
             _topUpBalanceForm = new TopUpBalanceForm(this);
             _userService = new UserService();
+            _ticketService = new TicketService();
         }
 
         public AccountForm(PreviewForm previewForm, UserViewModel user) : this()
@@ -36,13 +38,13 @@ namespace CinemaOnline.PL.Forms
             _emailAddressTextBox.Text = _user.Email;
             _passwordTextBox.Text = _user.Password;
             _balanceTextBox.Text = _user.Balance.ToString();
+            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.Id).ToString();
         }
 
         public void TopUpBalance(float amount)
         {
             _user.Balance += amount;
             _userService.Update(_user);
-            _balanceTextBox.Text = _user.Balance.ToString();
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)
@@ -60,6 +62,12 @@ namespace CinemaOnline.PL.Forms
         private void AccountForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void AccountForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _balanceTextBox.Text = _user.Balance.ToString();
+            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.Id).ToString();
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CinemaOnline.DAL.Models
+namespace CinemaOnline.BLL.ViewModels
 {
-    public class SessionModel
+    public class SessionViewModel
     {
         public int Id { get; set; }
         public string CinemaName { get; set; }

@@ -8,10 +8,11 @@ namespace CinemaOnline.BLL.ViewModels
 {
     public class FilmViewModel
     {
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImgUrl { get; set; }
-        public List<CinemaViewModel> Cinemas { get; set; }
+        public List<SessionViewModel> Sessions { get; set; }
         public List<string> Genres { get; set; }
     }
 }

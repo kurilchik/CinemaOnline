@@ -42,19 +42,19 @@ namespace CinemaOnline.PL.Forms
 
             foreach (var item in _films)
             {
-                var film = new PictureBox()
+                var filmView = new PictureBox()
                 {
                     Size = new Size(300, 430),
                     SizeMode = PictureBoxSizeMode.Zoom,
                     ImageLocation = item.ImgUrl
                 };
 
-                _filmsFlowLayoutPanel.Controls.Add(film);
+                _filmsFlowLayoutPanel.Controls.Add(filmView);
 
-                film.Click += (object sender, EventArgs e) =>
+                filmView.Click += (object sender, EventArgs e) =>
                 {
                     Hide();
-                    PaymentForm paymentForm = new PaymentForm(item, this);
+                    PaymentForm paymentForm = new PaymentForm(item, _user, this);
                     paymentForm.Show();
                 };
             }

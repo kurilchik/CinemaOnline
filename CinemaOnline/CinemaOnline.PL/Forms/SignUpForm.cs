@@ -45,7 +45,7 @@ namespace CinemaOnline.PL.Forms
 
                     _userService.Add(user);
 
-                    MessageBox.Show($"Registration successful!\nGift for registration {user.Balance} BYN.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Registration successful!\nGift for registration {GIFT} BYN.", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
                     _signInForm.Show();
