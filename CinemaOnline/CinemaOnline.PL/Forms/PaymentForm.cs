@@ -93,7 +93,7 @@ namespace CinemaOnline.PL.Forms
             _timeComboBox.Items.Clear();
             _timeComboBox.Text = string.Empty;
             _priceTextLabel.Text = string.Empty;
-            _cinemaComboBox.Items.AddRange(_film.Sessions.Select(s => s.CinemaName).ToArray());
+            _cinemaComboBox.Items.AddRange(_film.Sessions.Select(s => s.CinemaName).Distinct().ToArray());
             
         }
 
