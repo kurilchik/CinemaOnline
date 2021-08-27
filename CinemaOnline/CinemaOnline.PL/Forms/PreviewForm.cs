@@ -3,12 +3,7 @@ using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL.Forms
@@ -31,6 +26,7 @@ namespace CinemaOnline.PL.Forms
             _accountForm = new AccountForm(this, _user);
             _filmService = new FilmService();
             _films = new List<FilmViewModel>();
+            _welcomLabel.Text = $"{_user.Name} Welcome to \"Cinema Online\"";
 
             ViewFilms();
         }
@@ -49,15 +45,21 @@ namespace CinemaOnline.PL.Forms
                     ImageLocation = item.ImgUrl
                 };
 
-                _filmsFlowLayoutPanel.Controls.Add(filmView);
-
                 filmView.Click += (object sender, EventArgs e) =>
                 {
                     Hide();
                     PaymentForm paymentForm = new PaymentForm(item, _user, this);
                     paymentForm.Show();
                 };
+
+                _filmsFlowLayoutPanel.Controls.Add(filmView);
             }
+        }
+
+        private void filmView_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _accountForm.Show();
         }
 
         private void _accountTictureBox_Click(object sender, EventArgs e)

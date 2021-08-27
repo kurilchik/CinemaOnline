@@ -1,13 +1,6 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL.Forms
@@ -39,10 +32,10 @@ namespace CinemaOnline.PL.Forms
                 _accountForm.Show();
             }
             else
-                MessageBox.Show("Invalid card!", "Card", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+            {
+                MessageBox.Show(Constant.InvalidCard, Constant.Card, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }                
         }
-
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {

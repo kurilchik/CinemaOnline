@@ -3,12 +3,8 @@ using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL.Forms
@@ -54,21 +50,23 @@ namespace CinemaOnline.PL.Forms
             {
                 var price = float.Parse(_priceTextLabel.Text);
 
-                if (price < _user.Balance)
+                if (price <= _user.Balance)
                 {
                     _user.Balance -= price;
                     _userService.Update(_user);
 
                     var session = _film.Sessions.Where(s => s.CinemaName == _cinemaComboBox.Text && s.Time.ToString() == _timeComboBox.Text).FirstOrDefault();
                     _ticketService.Add(_user.Id, session.Id);
-                    MessageBox.Show("Ticket purchased!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Constant.TicketPurchased, Constant.Ticket, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                     Hide();
                     _previewForm.Show();
                 }
                 else
-                    MessageBox.Show("Not enough funds to pay!", "Balance", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            
+                {
+                    MessageBox.Show(Constant.InvalidBalance, Constant.Balance, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                    
+            }            
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)

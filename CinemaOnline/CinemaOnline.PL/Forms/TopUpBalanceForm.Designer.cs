@@ -95,6 +95,7 @@ namespace CinemaOnline.PL.Forms
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TopUpBalanceForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Top Up Balance";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TopUpBalanceForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this._accountPictureBox)).EndInit();

@@ -51,9 +51,10 @@ namespace CinemaOnline.PL.Forms
             this._homePictureBox.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this._homePictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
             this._homePictureBox.Image = ((System.Drawing.Image)(resources.GetObject("_homePictureBox.Image")));
-            this._homePictureBox.Location = new System.Drawing.Point(11, 12);
+            this._homePictureBox.Location = new System.Drawing.Point(10, 9);
+            this._homePictureBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._homePictureBox.Name = "_homePictureBox";
-            this._homePictureBox.Size = new System.Drawing.Size(50, 51);
+            this._homePictureBox.Size = new System.Drawing.Size(44, 38);
             this._homePictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this._homePictureBox.TabIndex = 21;
             this._homePictureBox.TabStop = false;
@@ -62,77 +63,73 @@ namespace CinemaOnline.PL.Forms
             // _nameTextBox
             // 
             this._nameTextBox.Enabled = false;
-            this._nameTextBox.Location = new System.Drawing.Point(131, 96);
-            this._nameTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._nameTextBox.Location = new System.Drawing.Point(115, 72);
             this._nameTextBox.Name = "_nameTextBox";
             this._nameTextBox.ReadOnly = true;
-            this._nameTextBox.Size = new System.Drawing.Size(291, 27);
+            this._nameTextBox.Size = new System.Drawing.Size(255, 23);
             this._nameTextBox.TabIndex = 27;
             // 
             // _nameLabel
             // 
             this._nameLabel.AutoSize = true;
-            this._nameLabel.Location = new System.Drawing.Point(11, 103);
+            this._nameLabel.Location = new System.Drawing.Point(10, 77);
             this._nameLabel.Name = "_nameLabel";
-            this._nameLabel.Size = new System.Drawing.Size(52, 20);
+            this._nameLabel.Size = new System.Drawing.Size(42, 15);
             this._nameLabel.TabIndex = 26;
             this._nameLabel.Text = "Name:";
             // 
             // _emailAddressTextBox
             // 
             this._emailAddressTextBox.Enabled = false;
-            this._emailAddressTextBox.Location = new System.Drawing.Point(131, 169);
-            this._emailAddressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._emailAddressTextBox.Location = new System.Drawing.Point(115, 127);
             this._emailAddressTextBox.Name = "_emailAddressTextBox";
             this._emailAddressTextBox.ReadOnly = true;
-            this._emailAddressTextBox.Size = new System.Drawing.Size(291, 27);
+            this._emailAddressTextBox.Size = new System.Drawing.Size(255, 23);
             this._emailAddressTextBox.TabIndex = 24;
             // 
             // _passwordLabel
             // 
             this._passwordLabel.AutoSize = true;
-            this._passwordLabel.Location = new System.Drawing.Point(11, 253);
+            this._passwordLabel.Location = new System.Drawing.Point(10, 190);
             this._passwordLabel.Name = "_passwordLabel";
-            this._passwordLabel.Size = new System.Drawing.Size(73, 20);
+            this._passwordLabel.Size = new System.Drawing.Size(60, 15);
             this._passwordLabel.TabIndex = 23;
             this._passwordLabel.Text = "Password:";
             // 
             // _emailAddressLabel
             // 
             this._emailAddressLabel.AutoSize = true;
-            this._emailAddressLabel.Location = new System.Drawing.Point(9, 176);
+            this._emailAddressLabel.Location = new System.Drawing.Point(8, 132);
             this._emailAddressLabel.Name = "_emailAddressLabel";
-            this._emailAddressLabel.Size = new System.Drawing.Size(104, 20);
+            this._emailAddressLabel.Size = new System.Drawing.Size(82, 15);
             this._emailAddressLabel.TabIndex = 22;
             this._emailAddressLabel.Text = "Email address:";
             // 
             // _balanceLabel
             // 
             this._balanceLabel.AutoSize = true;
-            this._balanceLabel.Location = new System.Drawing.Point(11, 331);
+            this._balanceLabel.Location = new System.Drawing.Point(10, 248);
             this._balanceLabel.Name = "_balanceLabel";
-            this._balanceLabel.Size = new System.Drawing.Size(64, 20);
+            this._balanceLabel.Size = new System.Drawing.Size(51, 15);
             this._balanceLabel.TabIndex = 28;
             this._balanceLabel.Text = "Balance:";
             // 
             // _passwordTextBox
             // 
             this._passwordTextBox.Enabled = false;
-            this._passwordTextBox.Location = new System.Drawing.Point(131, 247);
-            this._passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._passwordTextBox.Location = new System.Drawing.Point(115, 185);
             this._passwordTextBox.Name = "_passwordTextBox";
             this._passwordTextBox.ReadOnly = true;
-            this._passwordTextBox.Size = new System.Drawing.Size(291, 27);
+            this._passwordTextBox.Size = new System.Drawing.Size(255, 23);
             this._passwordTextBox.TabIndex = 31;
             // 
             // _balanceTextBox
             // 
             this._balanceTextBox.Enabled = false;
-            this._balanceTextBox.Location = new System.Drawing.Point(131, 323);
-            this._balanceTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._balanceTextBox.Location = new System.Drawing.Point(115, 242);
             this._balanceTextBox.Name = "_balanceTextBox";
             this._balanceTextBox.ReadOnly = true;
-            this._balanceTextBox.Size = new System.Drawing.Size(113, 27);
+            this._balanceTextBox.Size = new System.Drawing.Size(99, 23);
             this._balanceTextBox.TabIndex = 32;
             // 
             // _topUpButton
@@ -141,9 +138,10 @@ namespace CinemaOnline.PL.Forms
             this._topUpButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._topUpButton.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._topUpButton.ForeColor = System.Drawing.SystemColors.ControlText;
-            this._topUpButton.Location = new System.Drawing.Point(0, 472);
+            this._topUpButton.Location = new System.Drawing.Point(0, 354);
+            this._topUpButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this._topUpButton.Name = "_topUpButton";
-            this._topUpButton.Size = new System.Drawing.Size(445, 56);
+            this._topUpButton.Size = new System.Drawing.Size(389, 42);
             this._topUpButton.TabIndex = 33;
             this._topUpButton.Text = "TOP UP BALANCE";
             this._topUpButton.UseVisualStyleBackColor = false;
@@ -152,35 +150,35 @@ namespace CinemaOnline.PL.Forms
             // _bYNLabel
             // 
             this._bYNLabel.AutoSize = true;
-            this._bYNLabel.Location = new System.Drawing.Point(263, 327);
+            this._bYNLabel.Location = new System.Drawing.Point(230, 245);
             this._bYNLabel.Name = "_bYNLabel";
-            this._bYNLabel.Size = new System.Drawing.Size(37, 20);
+            this._bYNLabel.Size = new System.Drawing.Size(30, 15);
             this._bYNLabel.TabIndex = 34;
             this._bYNLabel.Text = "BYN";
             // 
             // _ticketLabel
             // 
             this._ticketLabel.AutoSize = true;
-            this._ticketLabel.Location = new System.Drawing.Point(131, 407);
+            this._ticketLabel.Location = new System.Drawing.Point(115, 305);
             this._ticketLabel.Name = "_ticketLabel";
-            this._ticketLabel.Size = new System.Drawing.Size(202, 20);
+            this._ticketLabel.Size = new System.Drawing.Size(163, 15);
             this._ticketLabel.TabIndex = 35;
             this._ticketLabel.Text = "Number of tickets purchased:";
             // 
             // _ticketTExtLabel
             // 
             this._ticketTExtLabel.AutoSize = true;
-            this._ticketTExtLabel.Location = new System.Drawing.Point(339, 407);
+            this._ticketTExtLabel.Location = new System.Drawing.Point(297, 305);
             this._ticketTExtLabel.Name = "_ticketTExtLabel";
-            this._ticketTExtLabel.Size = new System.Drawing.Size(17, 20);
+            this._ticketTExtLabel.Size = new System.Drawing.Size(13, 15);
             this._ticketTExtLabel.TabIndex = 36;
             this._ticketTExtLabel.Text = "0";
             // 
             // AccountForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(445, 528);
+            this.ClientSize = new System.Drawing.Size(389, 396);
             this.Controls.Add(this._ticketTExtLabel);
             this.Controls.Add(this._ticketLabel);
             this.Controls.Add(this._bYNLabel);
@@ -196,8 +194,10 @@ namespace CinemaOnline.PL.Forms
             this.Controls.Add(this._homePictureBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "AccountForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Account";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AccountForm_FormClosing);
             this.VisibleChanged += new System.EventHandler(this.AccountForm_VisibleChanged);

@@ -42,27 +42,27 @@ namespace CinemaOnline.PL.Forms
             // _emailAddressLabel
             // 
             this._emailAddressLabel.AutoSize = true;
-            this._emailAddressLabel.Location = new System.Drawing.Point(9, 43);
+            this._emailAddressLabel.Location = new System.Drawing.Point(8, 32);
             this._emailAddressLabel.Name = "_emailAddressLabel";
-            this._emailAddressLabel.Size = new System.Drawing.Size(104, 20);
+            this._emailAddressLabel.Size = new System.Drawing.Size(82, 15);
             this._emailAddressLabel.TabIndex = 0;
             this._emailAddressLabel.Text = "Email address:";
             // 
             // _passwordLabel
             // 
             this._passwordLabel.AutoSize = true;
-            this._passwordLabel.Location = new System.Drawing.Point(12, 128);
+            this._passwordLabel.Location = new System.Drawing.Point(10, 96);
             this._passwordLabel.Name = "_passwordLabel";
-            this._passwordLabel.Size = new System.Drawing.Size(73, 20);
+            this._passwordLabel.Size = new System.Drawing.Size(60, 15);
             this._passwordLabel.TabIndex = 1;
             this._passwordLabel.Text = "Password:";
             // 
             // _informationalLabel
             // 
             this._informationalLabel.AutoSize = true;
-            this._informationalLabel.Location = new System.Drawing.Point(140, 202);
+            this._informationalLabel.Location = new System.Drawing.Point(122, 152);
             this._informationalLabel.Name = "_informationalLabel";
-            this._informationalLabel.Size = new System.Drawing.Size(222, 20);
+            this._informationalLabel.Size = new System.Drawing.Size(180, 15);
             this._informationalLabel.TabIndex = 2;
             this._informationalLabel.Text = "if you don\'t have an account yet.";
             // 
@@ -72,10 +72,9 @@ namespace CinemaOnline.PL.Forms
             this._singInButton.Dock = System.Windows.Forms.DockStyle.Bottom;
             this._singInButton.Font = new System.Drawing.Font("Segoe UI", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this._singInButton.ForeColor = System.Drawing.Color.White;
-            this._singInButton.Location = new System.Drawing.Point(0, 258);
-            this._singInButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._singInButton.Location = new System.Drawing.Point(0, 194);
             this._singInButton.Name = "_singInButton";
-            this._singInButton.Size = new System.Drawing.Size(434, 67);
+            this._singInButton.Size = new System.Drawing.Size(380, 50);
             this._singInButton.TabIndex = 3;
             this._singInButton.Text = "SIGN IN";
             this._singInButton.UseVisualStyleBackColor = false;
@@ -83,23 +82,21 @@ namespace CinemaOnline.PL.Forms
             // 
             // _emailAddressTextBox
             // 
-            this._emailAddressTextBox.Location = new System.Drawing.Point(122, 40);
-            this._emailAddressTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._emailAddressTextBox.Location = new System.Drawing.Point(107, 30);
             this._emailAddressTextBox.Name = "_emailAddressTextBox";
-            this._emailAddressTextBox.Size = new System.Drawing.Size(291, 27);
+            this._emailAddressTextBox.PlaceholderText = "Enter your email";
+            this._emailAddressTextBox.Size = new System.Drawing.Size(255, 23);
             this._emailAddressTextBox.TabIndex = 5;
-            this._emailAddressTextBox.Text = "andrew@mail.com";
             this._emailAddressTextBox.Leave += new System.EventHandler(this._emailAddressTextBox_Leave);
             // 
             // _passwordTextBox
             // 
-            this._passwordTextBox.Location = new System.Drawing.Point(122, 125);
-            this._passwordTextBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this._passwordTextBox.Location = new System.Drawing.Point(107, 94);
             this._passwordTextBox.Name = "_passwordTextBox";
             this._passwordTextBox.PasswordChar = '*';
-            this._passwordTextBox.Size = new System.Drawing.Size(291, 27);
+            this._passwordTextBox.PlaceholderText = "Enter your password";
+            this._passwordTextBox.Size = new System.Drawing.Size(255, 23);
             this._passwordTextBox.TabIndex = 6;
-            this._passwordTextBox.Text = "12345";
             this._passwordTextBox.Leave += new System.EventHandler(this._passwordTextBox_Leave);
             // 
             // _signUpLabel
@@ -107,18 +104,18 @@ namespace CinemaOnline.PL.Forms
             this._signUpLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this._signUpLabel.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point);
             this._signUpLabel.ForeColor = System.Drawing.Color.Navy;
-            this._signUpLabel.Location = new System.Drawing.Point(82, 202);
+            this._signUpLabel.Location = new System.Drawing.Point(72, 152);
             this._signUpLabel.Name = "_signUpLabel";
-            this._signUpLabel.Size = new System.Drawing.Size(63, 20);
+            this._signUpLabel.Size = new System.Drawing.Size(55, 15);
             this._signUpLabel.TabIndex = 7;
             this._signUpLabel.Text = "Sign up ";
             this._signUpLabel.Click += new System.EventHandler(this._signUpLabel_Click);
             // 
             // SignInForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(434, 325);
+            this.ClientSize = new System.Drawing.Size(380, 244);
             this.Controls.Add(this._signUpLabel);
             this.Controls.Add(this._passwordTextBox);
             this.Controls.Add(this._emailAddressTextBox);
@@ -128,6 +125,7 @@ namespace CinemaOnline.PL.Forms
             this.Controls.Add(this._emailAddressLabel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "SignInForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

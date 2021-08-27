@@ -2,13 +2,6 @@
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL.Forms
@@ -33,21 +26,27 @@ namespace CinemaOnline.PL.Forms
             var whiteSpace = string.IsNullOrEmpty(_passwordTextBox.Text);
 
             if (whiteSpace)
-                MessageBox.Show("Invalid password!", "Pasword", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            {
+                MessageBox.Show(Constant.InvalidPassword, Constant.Password, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
-            if (Email() && Password() && !whiteSpace)
+            var emailValid = Validation.EmailValidation(_emailAddressTextBox.Text);
+            var passwordValid = Validation.PasswordValidation(_passwordTextBox.Text);
+
+
+            if (emailValid && passwordValid && !whiteSpace)
             {
                 var user = _userService.GetByEmail(_emailAddressTextBox.Text);
                 if (user != null && user.Email == _emailAddressTextBox.Text && user.Password == _passwordTextBox.Text)
                 {
-                    MessageBox.Show("Login completed successfully!", "Successfully", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show(Constant.SuccessfulLogin, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
                     PreviewForm previewForm = new PreviewForm(user);
                     previewForm.Show();
                 }
                 else
-                    MessageBox.Show("Incorrect login or password!", "Sign in", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Constant.SignInFailed, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -55,40 +54,14 @@ namespace CinemaOnline.PL.Forms
         {
             if (_emailAddressTextBox.Text.Trim() != string.Empty)
             {
-                Email();
+                Validation.EmailValidation(_emailAddressTextBox.Text);
             }
-        }
-
-        private bool Email()
-        {
-            try
-            {
-                var mailAddress = new System.Net.Mail.MailAddress(_emailAddressTextBox.Text);
-                return true;
-            }
-            catch
-            {
-                MessageBox.Show("E-mail address format is not correct.", "Email Address", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-        }
+        }        
 
         private void _passwordTextBox_Leave(object sender, EventArgs e)
         {
-            Password();
-        }
-
-        private bool Password()
-        {
-            if (_passwordTextBox.Text.Contains(' '))
-            {
-                MessageBox.Show("Invalid password!", "Pasword", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else
-                return true;
-        }
+            Validation.PasswordValidation(_passwordTextBox.Text);
+        }        
 
         private void _signUpLabel_Click(object sender, EventArgs e)
         {
