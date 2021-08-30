@@ -11,16 +11,19 @@ namespace CinemaOnline.PL.Forms
         private SignInForm _signInForm;
         private IUserService _userService;
 
-        public SignUpForm()
+        public SignUpForm(SignInForm signInForm)
         {
             InitializeComponent();
-        }
 
-        public SignUpForm(SignInForm signInForm) : this()
-        {
             _userService = new UserService();
             _signInForm = signInForm;
         }
+
+        //public SignUpForm(SignInForm signInForm) : this()
+        //{
+        //    _userService = new UserService();
+        //    _signInForm = signInForm;
+        //}
 
         private void _singUpButton_Click(object sender, EventArgs e)
         {

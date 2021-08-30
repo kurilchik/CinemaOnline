@@ -10,16 +10,19 @@ namespace CinemaOnline.PL.Forms
         private AccountForm _accountForm;
         private ITopUpService _topUpService;
 
-        public TopUpBalanceForm()
+        public TopUpBalanceForm(AccountForm accountForm)
         {
             InitializeComponent();
-        }
 
-        public TopUpBalanceForm(AccountForm accountForm) : this()
-        {
             _accountForm = accountForm;
             _topUpService = new TopUpService();
         }
+
+        //public TopUpBalanceForm(AccountForm accountForm) : this()
+        //{
+        //    _accountForm = accountForm;
+        //    _topUpService = new TopUpService();
+        //}
 
         private void _topUpButton_Click(object sender, EventArgs e)
         {

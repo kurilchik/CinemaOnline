@@ -9,16 +9,14 @@ namespace CinemaOnline.PL.Forms
     public partial class SignInForm : Form
     {
         private SignUpForm _signUpForm;
-        private UserViewModel _user;
         private IUserService _userService;
 
-        public SignInForm()
+        public SignInForm(IUserService userService)
         {
             InitializeComponent();
 
-            _user = new UserViewModel();
             _signUpForm = new SignUpForm(this);
-            _userService = new UserService();
+            _userService = userService;
         }
 
         private void _singInButton_Click(object sender, EventArgs e)

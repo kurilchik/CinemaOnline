@@ -18,13 +18,10 @@ namespace CinemaOnline.PL.Forms
         private IUserService _userService;
         private ITicketService _ticketService;
 
-        public PaymentForm()
+        public PaymentForm(FilmViewModel film, UserViewModel user, PreviewForm previewForm)
         {
             InitializeComponent();
-        }
 
-        public PaymentForm(FilmViewModel film, UserViewModel user, PreviewForm previewForm) : this()
-        {
             _user = user;
             _previewForm = previewForm;
             _filmService = new FilmService();
@@ -34,6 +31,18 @@ namespace CinemaOnline.PL.Forms
 
             FilmView();
         }
+
+        //public PaymentForm(FilmViewModel film, UserViewModel user, PreviewForm previewForm) : this()
+        //{
+        //    _user = user;
+        //    _previewForm = previewForm;
+        //    _filmService = new FilmService();
+        //    _film = _filmService.GetSessions(film);
+        //    _userService = new UserService();
+        //    _ticketService = new TicketService();
+
+        //    FilmView();
+        //}
 
         private void FilmView()
         {

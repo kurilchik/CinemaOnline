@@ -15,13 +15,10 @@ namespace CinemaOnline.PL.Forms
         private List<FilmViewModel> _films;
         private IFilmService _filmService;
 
-        public PreviewForm()
+        public PreviewForm(UserViewModel user)
         {
-            InitializeComponent();     
-        }
+            InitializeComponent();
 
-        public PreviewForm(UserViewModel user) : this()
-        {
             _user = user;
             _accountForm = new AccountForm(this, _user);
             _filmService = new FilmService();
@@ -30,6 +27,17 @@ namespace CinemaOnline.PL.Forms
 
             ViewFilms();
         }
+
+        //public PreviewForm(UserViewModel user) : this()
+        //{
+        //    _user = user;
+        //    _accountForm = new AccountForm(this, _user);
+        //    _filmService = new FilmService();
+        //    _films = new List<FilmViewModel>();
+        //    _welcomLabel.Text = $"{_user.Name} Welcome to \"Cinema Online\"";
+
+        //    ViewFilms();
+        //}
 
         private void ViewFilms()
         {
