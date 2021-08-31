@@ -1,6 +1,6 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
-using CinemaOnline.BLL.Services;
+using SimpleInjector;
 using System;
 using System.Windows.Forms;
 
@@ -8,22 +8,16 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignUpForm : Form
     {
-        private SignInForm _signInForm;
         private IUserService _userService;
+        private SignInForm _signInForm;
 
-        public SignUpForm(SignInForm signInForm)
+        public SignUpForm(Container container, IUserService userService)
         {
             InitializeComponent();
 
-            _userService = new UserService();
-            _signInForm = signInForm;
+            _userService = userService;
+            _signInForm = container.GetInstance<SignInForm>();
         }
-
-        //public SignUpForm(SignInForm signInForm) : this()
-        //{
-        //    _userService = new UserService();
-        //    _signInForm = signInForm;
-        //}
 
         private void _singUpButton_Click(object sender, EventArgs e)
         {

@@ -1,6 +1,6 @@
-﻿using CinemaOnline.BLL.Services;
-using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.BLL.ViewModels;
+﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.PL.ModelServices.Interfaces;
+using SimpleInjector;
 using System;
 using System.Windows.Forms;
 
@@ -8,15 +8,19 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignInForm : Form
     {
-        private SignUpForm _signUpForm;
+        private IUserSession _user;
         private IUserService _userService;
+        private SignUpForm _signUpForm;
+        private PreviewForm _previewForm;
 
-        public SignInForm(IUserService userService)
+        public SignInForm(Container container, IUserService userService, IUserSession user)
         {
             InitializeComponent();
 
-            _signUpForm = new SignUpForm(this);
+            _user = user;
             _userService = userService;
+            _signUpForm = container.GetInstance<SignUpForm>();
+            _previewForm = container.GetInstance<PreviewForm>(); ;
         }
 
         private void _singInButton_Click(object sender, EventArgs e)
@@ -34,14 +38,13 @@ namespace CinemaOnline.PL.Forms
 
             if (emailValid && passwordValid && !whiteSpace)
             {
-                var user = _userService.GetByEmail(_emailAddressTextBox.Text);
-                if (user != null && user.Email == _emailAddressTextBox.Text && user.Password == _passwordTextBox.Text)
+                _user.User = _userService.GetByEmail(_emailAddressTextBox.Text);
+                if (_user.User != null && _user.User.Email == _emailAddressTextBox.Text && _user.User.Password == _passwordTextBox.Text)
                 {
                     MessageBox.Show(Constant.SuccessfulLogin, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
-                    PreviewForm previewForm = new PreviewForm(user);
-                    previewForm.Show();
+                    _previewForm.Show();
                 }
                 else
                     MessageBox.Show(Constant.SignInFailed, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Error);

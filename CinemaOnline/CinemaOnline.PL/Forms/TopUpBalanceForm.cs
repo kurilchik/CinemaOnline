@@ -1,5 +1,6 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
+using SimpleInjector;
 using System;
 using System.Windows.Forms;
 
@@ -10,19 +11,13 @@ namespace CinemaOnline.PL.Forms
         private AccountForm _accountForm;
         private ITopUpService _topUpService;
 
-        public TopUpBalanceForm(AccountForm accountForm)
+        public TopUpBalanceForm(Container container, ITopUpService topUpService)
         {
             InitializeComponent();
 
-            _accountForm = accountForm;
-            _topUpService = new TopUpService();
+            _accountForm = container.GetInstance<AccountForm>(); 
+            _topUpService = topUpService;
         }
-
-        //public TopUpBalanceForm(AccountForm accountForm) : this()
-        //{
-        //    _accountForm = accountForm;
-        //    _topUpService = new TopUpService();
-        //}
 
         private void _topUpButton_Click(object sender, EventArgs e)
         {

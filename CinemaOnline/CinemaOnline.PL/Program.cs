@@ -24,29 +24,9 @@ namespace CinemaOnline.PL
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            var container = Bootstrap();
+            var container = DependencyInjectionHelper.Bootstrap();
 
             Application.Run(container.GetInstance<SignInForm>());
-        }
-
-        private static Container Bootstrap()
-        {
-            var container = new Container();
-
-            container.Register<IUserService, UserService>();
-            container.RegisterForm<SignInForm>();
-            //container.RegisterForm<SignUpForm>();
-
-            container.Verify();
-
-            return container;
-        }
-
-        private static void RegisterForm<TForm>(this Container container) where TForm : Form
-        {
-            var registration = Lifestyle.Transient.CreateRegistration<TForm>(container);
-            registration.SuppressDiagnosticWarning(DiagnosticType.DisposableTransientComponent, "Done manually.");
-            container.AddRegistration<TForm>(registration);
         }
     }
 }

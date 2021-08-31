@@ -1,6 +1,6 @@
-﻿using CinemaOnline.BLL.Services;
-using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.BLL.ViewModels;
+﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.PL.ModelServices.Interfaces;
+using SimpleInjector;
 using System;
 using System.Windows.Forms;
 
@@ -8,45 +8,33 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class AccountForm : Form
     {
-        private PreviewForm _previewForm;
-        private TopUpBalanceForm _topUpBalanceForm;
-        private UserViewModel _user;
+        private IUserSession _user;
         private IUserService _userService;
         private ITicketService _ticketService;
+        private PreviewForm _previewForm;
+        private TopUpBalanceForm _topUpBalanceForm;
 
-        public AccountForm(PreviewForm previewForm, UserViewModel user)
+        public AccountForm(Container container, IUserSession user, IUserService userService, ITicketService ticketService)
         {
             InitializeComponent();
-            _topUpBalanceForm = new TopUpBalanceForm(this);
-            _userService = new UserService();
-            _ticketService = new TicketService();
 
-            _previewForm = previewForm;
             _user = user;
+            _userService = userService;
+            _ticketService = ticketService;
+            _previewForm = container.GetInstance<PreviewForm>();
+            _topUpBalanceForm = container.GetInstance<TopUpBalanceForm>();
 
-            _nameTextBox.Text = _user.Name;
-            _emailAddressTextBox.Text = _user.Email;
-            _passwordTextBox.Text = _user.Password;
-            _balanceTextBox.Text = _user.Balance.ToString();
-            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.Id).ToString();
+            _nameTextBox.Text = _user.User.Name;
+            _emailAddressTextBox.Text = _user.User.Email;
+            _passwordTextBox.Text = _user.User.Password;
+            _balanceTextBox.Text = _user.User.Balance.ToString();
+            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.User.Id).ToString();
         }
-
-        //public AccountForm(PreviewForm previewForm, UserViewModel user) : this()
-        //{
-        //    _previewForm = previewForm;
-        //    _user = user;
-
-        //    _nameTextBox.Text = _user.Name;
-        //    _emailAddressTextBox.Text = _user.Email;
-        //    _passwordTextBox.Text = _user.Password;
-        //    _balanceTextBox.Text = _user.Balance.ToString();
-        //    _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.Id).ToString();
-        //}
 
         public void TopUpBalance(float amount)
         {
-            _user.Balance += amount;
-            _userService.Update(_user);
+            _user.User.Balance += amount;
+            _userService.Update(_user.User);
         }
 
         private void _homePictureBox_Click(object sender, EventArgs e)
@@ -68,8 +56,8 @@ namespace CinemaOnline.PL.Forms
 
         private void AccountForm_VisibleChanged(object sender, EventArgs e)
         {
-            _balanceTextBox.Text = _user.Balance.ToString();
-            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.Id).ToString();
+            _balanceTextBox.Text = _user.User.Balance.ToString();
+            _ticketTExtLabel.Text = _ticketService.CountUserTickets(_user.User.Id).ToString();
         }
     }
 }

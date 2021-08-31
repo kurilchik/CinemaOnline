@@ -1,6 +1,7 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -31,18 +32,6 @@ namespace CinemaOnline.PL.Forms
 
             FilmView();
         }
-
-        //public PaymentForm(FilmViewModel film, UserViewModel user, PreviewForm previewForm) : this()
-        //{
-        //    _user = user;
-        //    _previewForm = previewForm;
-        //    _filmService = new FilmService();
-        //    _film = _filmService.GetSessions(film);
-        //    _userService = new UserService();
-        //    _ticketService = new TicketService();
-
-        //    FilmView();
-        //}
 
         private void FilmView()
         {

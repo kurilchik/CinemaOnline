@@ -1,6 +1,8 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
+using CinemaOnline.PL.ModelServices.Interfaces;
+using SimpleInjector;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,34 +12,23 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class PreviewForm : Form
     {
-        private AccountForm _accountForm;
-        private UserViewModel _user;
-        private List<FilmViewModel> _films;
+        private IUserSession _user;
         private IFilmService _filmService;
+        private AccountForm _accountForm;
+        private List<FilmViewModel> _films = new List<FilmViewModel>();
 
-        public PreviewForm(UserViewModel user)
+        public PreviewForm(Container container, IUserSession user, IFilmService filmService)
         {
             InitializeComponent();
 
             _user = user;
-            _accountForm = new AccountForm(this, _user);
-            _filmService = new FilmService();
-            _films = new List<FilmViewModel>();
-            _welcomLabel.Text = $"{_user.Name} Welcome to \"Cinema Online\"";
+            _accountForm = container.GetInstance<AccountForm>();
+            _filmService = filmService;
+
+            _welcomLabel.Text = $"{_user.User.Name} Welcome to \"Cinema Online\"";
 
             ViewFilms();
         }
-
-        //public PreviewForm(UserViewModel user) : this()
-        //{
-        //    _user = user;
-        //    _accountForm = new AccountForm(this, _user);
-        //    _filmService = new FilmService();
-        //    _films = new List<FilmViewModel>();
-        //    _welcomLabel.Text = $"{_user.Name} Welcome to \"Cinema Online\"";
-
-        //    ViewFilms();
-        //}
 
         private void ViewFilms()
         {
@@ -56,7 +47,7 @@ namespace CinemaOnline.PL.Forms
                 filmView.Click += (object sender, EventArgs e) =>
                 {
                     Hide();
-                    PaymentForm paymentForm = new PaymentForm(item, _user, this);
+                    PaymentForm paymentForm = new PaymentForm(item, _user.User, this);
                     paymentForm.Show();
                 };
 
