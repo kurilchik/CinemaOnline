@@ -7,6 +7,7 @@ using CinemaOnline.PL.ModelServices;
 using CinemaOnline.PL.ModelServices.Interfaces;
 using CinemaOnline.PL.NavigationServices;
 using CinemaOnline.PL.NavigationServices.Interfaces;
+using Microsoft.EntityFrameworkCore;
 using SimpleInjector;
 using SimpleInjector.Diagnostics;
 using System.Windows.Forms;
@@ -19,7 +20,6 @@ namespace CinemaOnline.PL
         {
             var container = new Container();
 
-            
             container.Register<IFormOpener, FormOpener>(Lifestyle.Singleton);
 
             container.Register<IUserSession, UserSession>(Lifestyle.Singleton);
@@ -30,7 +30,13 @@ namespace CinemaOnline.PL
             container.Register<IFilmService, FilmService>();
             container.Register<ITopUpService, TopUpService>();
 
-            container.Register<TicketDbContext>(Lifestyle.Singleton);
+
+            container.Register(() => 
+            {
+                var options = new DbContextOptionsBuilder<TicketDbContext>().UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB; Database=CinemaTicket; Trusted_Connection=True;").Options;
+                return new TicketDbContext(options);
+            }, Lifestyle.Singleton);
+
 
             container.Register<IUserRepository, UserRepository>();
             container.Register<ITopUpRepository, TopUpRepository>();

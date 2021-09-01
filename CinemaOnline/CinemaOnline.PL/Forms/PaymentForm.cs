@@ -1,4 +1,5 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.PL.ModelServices.Interfaces;
 using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
@@ -25,7 +26,6 @@ namespace CinemaOnline.PL.Forms
             _formOpener = formOpener;
             _user = user;
             _film = film;
-            _film.Film = _filmService.GetSessions(film.Film);
             _filmService = filmService;
             _userService = userService;
             _ticketService = ticketService;
@@ -35,11 +35,11 @@ namespace CinemaOnline.PL.Forms
 
         private void FilmView()
         {
+            _film.Film = _filmService.GetSessions(_film.Film);
             _filmPictureBox.ImageLocation = _film.Film.ImgUrl;
             Text = _film.Film.Name;
             _nameTextLabel.Text = _film.Film.Name;
             _descriptionTextLabel.Text = _film.Film.Description;
-            _genreTextLabel.Text = string.Join(", ", _film.Film.Genres);
         }
 
         private void _payButton_Click(object sender, EventArgs e)
@@ -96,6 +96,11 @@ namespace CinemaOnline.PL.Forms
         private void _timeComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             _priceTextLabel.Text = _film.Film.Sessions.Where(t => t.Time.ToString() == _timeComboBox.Text).Select(p => p.Price).First().ToString();
+        }
+
+        private void PaymentForm_VisibleChanged(object sender, EventArgs e)
+        {
+            _genreTextLabel.Text = string.Join(", ", _film.Film.Genres);
         }
     }
 }

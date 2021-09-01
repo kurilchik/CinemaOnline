@@ -1,9 +1,10 @@
 ﻿using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.PL.ModelServices.Interfaces;
+using System.Collections.Generic;
 
 namespace CinemaOnline.PL.ModelServices
 {
-    class FilmSelected : IFilmSelected
+    public class FilmSelected : IFilmSelected
     {
         public FilmViewModel Film { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+﻿using Microsoft.EntityFrameworkCore;
 
 #nullable disable
 
@@ -27,14 +25,14 @@ namespace CinemaOnline.DAL.DataModels
         public virtual DbSet<TopUpCard> TopUpCards { get; set; }
         public virtual DbSet<User> Users { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    if (!optionsBuilder.IsConfigured)
+        //    {
 
-                optionsBuilder.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB; Database=CinemaTicket; Trusted_Connection=True;");
-            }
-        }
+        //        optionsBuilder.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB; Database=CinemaTicket; Trusted_Connection=True;");
+        //    }
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
