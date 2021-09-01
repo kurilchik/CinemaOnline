@@ -25,13 +25,13 @@ namespace CinemaOnline.PL.Forms
             _film = film;
             _filmService = filmService;
 
-            _welcomLabel.Text = $"{_user.User.Name} Welcome to \"Cinema Online\"";
-
             ViewFilms();
         }
 
         private void ViewFilms()
         {
+            _welcomLabel.Text = $"{_user.User.Name} Welcome to \"Cinema Online\"";
+
             List<FilmViewModel> films = _filmService.GetAllFilms();
 
 

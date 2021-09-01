@@ -1,5 +1,8 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.DAL.DataModels;
+using CinemaOnline.DAL.Repositories;
+using CinemaOnline.DAL.Repositories.Interfaces;
 using CinemaOnline.PL.ModelServices;
 using CinemaOnline.PL.ModelServices.Interfaces;
 using CinemaOnline.PL.NavigationServices;
@@ -26,6 +29,14 @@ namespace CinemaOnline.PL
             container.Register<ITicketService, TicketService>();
             container.Register<IFilmService, FilmService>();
             container.Register<ITopUpService, TopUpService>();
+
+            container.Register<TicketDbContext>(Lifestyle.Singleton);
+
+            container.Register<IUserRepository, UserRepository>();
+            container.Register<ITopUpRepository, TopUpRepository>();
+            container.Register<ITicketRepository, TicketRepository>();
+            container.Register<IFilmRepository, FilmRepository>();
+            container.Register<ISessionRepository, SessionRepository>();
 
             AutoRegisterWindowsForms(container);
 

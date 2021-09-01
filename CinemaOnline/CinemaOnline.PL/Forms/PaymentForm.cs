@@ -24,6 +24,7 @@ namespace CinemaOnline.PL.Forms
 
             _formOpener = formOpener;
             _user = user;
+            _film = film;
             _film.Film = _filmService.GetSessions(film.Film);
             _filmService = filmService;
             _userService = userService;

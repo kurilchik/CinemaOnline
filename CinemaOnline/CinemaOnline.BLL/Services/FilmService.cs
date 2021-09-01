@@ -3,13 +3,8 @@ using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
-using CinemaOnline.DAL.Repositories;
 using CinemaOnline.DAL.Repositories.Interfaces;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.BLL.Services
 {
@@ -19,11 +14,11 @@ namespace CinemaOnline.BLL.Services
         private IFilmRepository _filmRepository;
         private ISessionRepository _sessionRepository;
 
-        public FilmService()
+        public FilmService(TicketDbContext ticketDbContext, IFilmRepository filmRepository, ISessionRepository sessionRepository)
         {
-            _ticketDbContext = new TicketDbContext();
-            _filmRepository = new FilmRepository(_ticketDbContext);
-            _sessionRepository = new SessionRepository(_ticketDbContext);
+            _ticketDbContext = ticketDbContext;
+            _filmRepository = filmRepository;
+            _sessionRepository = sessionRepository;
         }
 
         public List<FilmViewModel> GetAllFilms()

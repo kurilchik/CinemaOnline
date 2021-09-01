@@ -3,13 +3,7 @@ using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
-using CinemaOnline.DAL.Repositories;
 using CinemaOnline.DAL.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.BLL.Services
 {
@@ -18,10 +12,10 @@ namespace CinemaOnline.BLL.Services
         private TicketDbContext _ticketDbContext;
         private IUserRepository _userRepository;
 
-        public UserService()
+        public UserService(TicketDbContext ticketDbContext, IUserRepository userRepository)
         {
-            _ticketDbContext = new TicketDbContext();
-            _userRepository = new UserRepository(_ticketDbContext);
+            _ticketDbContext = ticketDbContext;
+            _userRepository = userRepository;
         }
 
         public void Add(UserViewModel userViewModel)

@@ -1,13 +1,8 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
-using CinemaOnline.DAL.Repositories;
 using CinemaOnline.DAL.Repositories.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.BLL.Services
 {
@@ -16,10 +11,10 @@ namespace CinemaOnline.BLL.Services
         private TicketDbContext _ticketDbContext;
         private ITopUpRepository _topUpRepository;
 
-        public TopUpService()
+        public TopUpService(TicketDbContext ticketDbContext, ITopUpRepository topUpRepository)
         {
-            _ticketDbContext = new TicketDbContext();
-            _topUpRepository = new TopUpRepository(_ticketDbContext);
+            _ticketDbContext = ticketDbContext;
+            _topUpRepository = topUpRepository;
         }
 
         public float TopUpCard(string guid)
