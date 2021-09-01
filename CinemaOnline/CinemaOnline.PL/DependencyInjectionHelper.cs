@@ -1,15 +1,11 @@
 ﻿using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.PL.Forms;
 using CinemaOnline.PL.ModelServices;
 using CinemaOnline.PL.ModelServices.Interfaces;
+using CinemaOnline.PL.NavigationServices;
+using CinemaOnline.PL.NavigationServices.Interfaces;
 using SimpleInjector;
 using SimpleInjector.Diagnostics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL
@@ -20,23 +16,39 @@ namespace CinemaOnline.PL
         {
             var container = new Container();
 
+            
+            container.Register<IFormOpener, FormOpener>(Lifestyle.Singleton);
+
             container.Register<IUserSession, UserSession>(Lifestyle.Singleton);
+            container.Register<IFilmSelected, FilmSelected>(Lifestyle.Singleton);
 
             container.Register<IUserService, UserService>();
             container.Register<ITicketService, TicketService>();
             container.Register<IFilmService, FilmService>();
             container.Register<ITopUpService, TopUpService>();
 
-            container.RegisterForm<SignInForm>();
-            container.RegisterForm<SignUpForm>();
-            container.RegisterForm<PreviewForm>();
-            //container.RegisterForm<PaymentForm>();
-            container.RegisterForm<AccountForm>();
-            container.RegisterForm<TopUpBalanceForm>();
+            AutoRegisterWindowsForms(container);
 
             container.Verify();
 
             return container;
+        }
+
+        private static void AutoRegisterWindowsForms(Container container)
+        {
+            var types = container.GetTypesToRegister<Form>(typeof(Program).Assembly);
+
+            foreach (var type in types)
+            {
+                var registration =
+                    Lifestyle.Transient.CreateRegistration(type, container);
+
+                registration.SuppressDiagnosticWarning(
+                    DiagnosticType.DisposableTransientComponent,
+                    "Forms should be disposed by app code; not by the container.");
+
+                container.AddRegistration(type, registration);
+            }
         }
 
         private static void RegisterForm<TForm>(this Container container) where TForm : Form

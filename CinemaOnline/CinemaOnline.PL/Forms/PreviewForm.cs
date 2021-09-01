@@ -1,8 +1,7 @@
-﻿using CinemaOnline.BLL.Services;
-using CinemaOnline.BLL.Services.Interfaces;
+﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.PL.ModelServices.Interfaces;
-using SimpleInjector;
+using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -12,17 +11,18 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class PreviewForm : Form
     {
+        private readonly IFormOpener _formOpener;
         private IUserSession _user;
+        private IFilmSelected _film;
         private IFilmService _filmService;
-        private AccountForm _accountForm;
-        private List<FilmViewModel> _films = new List<FilmViewModel>();
 
-        public PreviewForm(Container container, IUserSession user, IFilmService filmService)
+        public PreviewForm(IFormOpener formOpener, IUserSession user, IFilmSelected film, IFilmService filmService)
         {
             InitializeComponent();
 
+            _formOpener = formOpener;
             _user = user;
-            _accountForm = container.GetInstance<AccountForm>();
+            _film = film;
             _filmService = filmService;
 
             _welcomLabel.Text = $"{_user.User.Name} Welcome to \"Cinema Online\"";
@@ -32,10 +32,10 @@ namespace CinemaOnline.PL.Forms
 
         private void ViewFilms()
         {
-            _films = _filmService.GetAllFilms();
+            List<FilmViewModel> films = _filmService.GetAllFilms();
 
 
-            foreach (var item in _films)
+            foreach (var item in films)
             {
                 var filmView = new PictureBox()
                 {
@@ -47,8 +47,8 @@ namespace CinemaOnline.PL.Forms
                 filmView.Click += (object sender, EventArgs e) =>
                 {
                     Hide();
-                    PaymentForm paymentForm = new PaymentForm(item, _user.User, this);
-                    paymentForm.Show();
+                    _film.Film = item;
+                    _formOpener.ShowModelessForm<PaymentForm>();
                 };
 
                 _filmsFlowLayoutPanel.Controls.Add(filmView);
@@ -58,13 +58,13 @@ namespace CinemaOnline.PL.Forms
         private void filmView_Click(object sender, EventArgs e)
         {
             Hide();
-            _accountForm.Show();
+            _formOpener.ShowModelessForm<AccountForm>();
         }
 
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
             Hide();
-            _accountForm.Show();
+            _formOpener.ShowModelessForm<AccountForm>();
         }
 
         private void PreviewForm_FormClosing(object sender, FormClosingEventArgs e)

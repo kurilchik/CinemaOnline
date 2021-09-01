@@ -9,6 +9,6 @@ namespace CinemaOnline.PL.ModelServices.Interfaces
 {
     public interface IUserSession
     {
-        public UserViewModel User { get; set; }
+        UserViewModel User { get; set; }
     }
 }

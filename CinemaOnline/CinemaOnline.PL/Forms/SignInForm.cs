@@ -1,6 +1,6 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.PL.ModelServices.Interfaces;
-using SimpleInjector;
+using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -8,19 +8,17 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignInForm : Form
     {
+        private readonly IFormOpener _formOpener;
         private IUserSession _user;
         private IUserService _userService;
-        private SignUpForm _signUpForm;
-        private PreviewForm _previewForm;
 
-        public SignInForm(Container container, IUserService userService, IUserSession user)
+        public SignInForm(IFormOpener formOpener, IUserService userService, IUserSession user)
         {
             InitializeComponent();
 
+            _formOpener = formOpener;
             _user = user;
-            _userService = userService;
-            _signUpForm = container.GetInstance<SignUpForm>();
-            _previewForm = container.GetInstance<PreviewForm>(); ;
+            _userService = userService;            
         }
 
         private void _singInButton_Click(object sender, EventArgs e)
@@ -44,7 +42,7 @@ namespace CinemaOnline.PL.Forms
                     MessageBox.Show(Constant.SuccessfulLogin, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
-                    _previewForm.Show();
+                    _formOpener.ShowModelessForm<PreviewForm>();
                 }
                 else
                     MessageBox.Show(Constant.SignInFailed, Constant.SignIn, MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -67,7 +65,7 @@ namespace CinemaOnline.PL.Forms
         private void _signUpLabel_Click(object sender, EventArgs e)
         {
             Hide();
-            _signUpForm.Show();
+            _formOpener.ShowModelessForm<SignUpForm>();
         }
 
         private void SignInForm_FormClosing(object sender, FormClosingEventArgs e)

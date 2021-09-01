@@ -1,6 +1,6 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
-using SimpleInjector;
+using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -8,15 +8,15 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class SignUpForm : Form
     {
+        private readonly IFormOpener _formOpener;
         private IUserService _userService;
-        private SignInForm _signInForm;
 
-        public SignUpForm(Container container, IUserService userService)
+        public SignUpForm(IFormOpener formOpener, IUserService userService)
         {
             InitializeComponent();
 
+            _formOpener = formOpener;
             _userService = userService;
-            _signInForm = container.GetInstance<SignInForm>();
         }
 
         private void _singUpButton_Click(object sender, EventArgs e)
@@ -49,7 +49,7 @@ namespace CinemaOnline.PL.Forms
                     MessageBox.Show($"Registration successful!\nGift for registration {Constant.Gift} BYN.", Constant.SignUp, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     Hide();
-                    _signInForm.Show();
+                    _formOpener.ShowModelessForm<SignInForm>();
                 }
                 else
                 {
@@ -74,7 +74,7 @@ namespace CinemaOnline.PL.Forms
         private void _signInLabel_Click(object sender, EventArgs e)
         {
             Hide();
-            _signInForm.Show();
+            _formOpener.ShowModelessForm<SignInForm>();
         }
 
         private void SignUpForm_FormClosing(object sender, FormClosingEventArgs e)

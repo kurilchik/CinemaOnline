@@ -11,5 +11,10 @@ namespace CinemaOnline.PL.ModelServices
     public class UserSession : IUserSession
     {
         public UserViewModel User { get; set; }
+
+        public UserSession()
+        {
+            User = new UserViewModel();
+        }
     }
 }

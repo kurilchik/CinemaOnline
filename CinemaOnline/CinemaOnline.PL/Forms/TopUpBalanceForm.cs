@@ -1,6 +1,6 @@
-﻿using CinemaOnline.BLL.Services;
-using CinemaOnline.BLL.Services.Interfaces;
-using SimpleInjector;
+﻿using CinemaOnline.BLL.Services.Interfaces;
+using CinemaOnline.PL.ModelServices.Interfaces;
+using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -8,14 +8,18 @@ namespace CinemaOnline.PL.Forms
 {
     public partial class TopUpBalanceForm : Form
     {
-        private AccountForm _accountForm;
+        private readonly IFormOpener _formOpener;
+        private IUserSession _user;
+        private IUserService _userService;
         private ITopUpService _topUpService;
 
-        public TopUpBalanceForm(Container container, ITopUpService topUpService)
+        public TopUpBalanceForm(IFormOpener formOpener, IUserSession user, IUserService userService, ITopUpService topUpService)
         {
             InitializeComponent();
 
-            _accountForm = container.GetInstance<AccountForm>(); 
+            _formOpener = formOpener;
+            _user = user;
+            _userService = userService;
             _topUpService = topUpService;
         }
 
@@ -25,9 +29,9 @@ namespace CinemaOnline.PL.Forms
 
             if (amount > 0)
             {
-                _accountForm.TopUpBalance(amount);
+                TopUpBalance(amount);
                 Hide();
-                _accountForm.Show();
+                _formOpener.ShowModelessForm<AccountForm>();
             }
             else
             {
@@ -35,10 +39,16 @@ namespace CinemaOnline.PL.Forms
             }                
         }
 
+        private void TopUpBalance(float amount)
+        {
+            _user.User.Balance += amount;
+            _userService.Update(_user.User);
+        }
+
         private void _accountTictureBox_Click(object sender, EventArgs e)
         {
             Hide();
-            _accountForm.Show();
+            _formOpener.ShowModelessForm<AccountForm>();
         }
 
         private void TopUpBalanceForm_FormClosing(object sender, FormClosingEventArgs e)
