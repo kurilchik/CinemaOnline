@@ -1,13 +1,5 @@
-using CinemaOnline.BLL.Services;
-using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.PL.Forms;
-using SimpleInjector;
-using SimpleInjector.Diagnostics;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CinemaOnline.PL

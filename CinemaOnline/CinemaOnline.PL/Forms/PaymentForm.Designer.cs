@@ -217,7 +217,6 @@ namespace CinemaOnline.PL.Forms
             this.MaximizeBox = false;
             this.Name = "PaymentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PaymentForm_FormClosing);
             this.VisibleChanged += new System.EventHandler(this.PaymentForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this._homePictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this._filmPictureBox)).EndInit();

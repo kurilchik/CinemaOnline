@@ -48,7 +48,11 @@ namespace CinemaOnline.PL.Forms
                 {
                     Hide();
                     _film.Film = item;
-                    _formOpener.ShowModelessForm<PaymentForm>();
+                    var dialog = _formOpener.ShowModalForm<PaymentForm>();
+                    if (dialog == DialogResult.Cancel)
+                    {
+                        Show();
+                    }
                 };
 
                 _filmsFlowLayoutPanel.Controls.Add(filmView);

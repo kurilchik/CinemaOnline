@@ -1,5 +1,4 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.PL.ModelServices.Interfaces;
 using CinemaOnline.PL.NavigationServices.Interfaces;
 using System;
@@ -57,8 +56,7 @@ namespace CinemaOnline.PL.Forms
                     _ticketService.Add(_user.User.Id, session.Id);
                     MessageBox.Show(Constant.TicketPurchased, Constant.Ticket, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    Hide();
-                    _formOpener.ShowModelessForm<PreviewForm>();
+                    this.DialogResult = DialogResult.Cancel;
                 }
                 else
                 {
@@ -69,13 +67,7 @@ namespace CinemaOnline.PL.Forms
 
         private void _homePictureBox_Click(object sender, EventArgs e)
         {
-            Hide();
-            _formOpener.ShowModelessForm<PreviewForm>();
-        }
-
-        private void PaymentForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Application.Exit();
+            this.DialogResult = DialogResult.Cancel;
         }
 
         private void _cinemaComboBox_SelectedIndexChanged(object sender, EventArgs e)
