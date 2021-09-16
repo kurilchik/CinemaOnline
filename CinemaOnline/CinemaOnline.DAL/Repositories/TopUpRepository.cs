@@ -10,19 +10,18 @@ namespace CinemaOnline.DAL.Repositories
     public class TopUpRepository : ITopUpRepository
     {
         private TicketDbContext _ticketDbContext;
+        private IMapper _mapper;
 
-        public TopUpRepository(TicketDbContext ticketDbContext)
+        public TopUpRepository(TicketDbContext ticketDbContext, IMapper mapper)
         {
             _ticketDbContext = ticketDbContext;
+            _mapper = mapper;
         }
 
         public TopUpCardModel GetByGuid(Guid guid)
         {
             var card = _ticketDbContext.TopUpCards.FirstOrDefault(c => c.Card == guid);
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<TopUpCard, TopUpCardModel>());
-            var mapper = new Mapper(config);
-            var topUpCardModel = mapper.Map<TopUpCard, TopUpCardModel>(card);
+            var topUpCardModel = _mapper.Map<TopUpCardModel>(card);
 
             return topUpCardModel;
         }

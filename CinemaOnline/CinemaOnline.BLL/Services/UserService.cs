@@ -11,18 +11,18 @@ namespace CinemaOnline.BLL.Services
     {
         private TicketDbContext _ticketDbContext;
         private IUserRepository _userRepository;
+        private IMapper _mapper;
 
-        public UserService(TicketDbContext ticketDbContext, IUserRepository userRepository)
+        public UserService(TicketDbContext ticketDbContext, IUserRepository userRepository, IMapper mapper)
         {
             _ticketDbContext = ticketDbContext;
             _userRepository = userRepository;
+            _mapper = mapper;
         }
 
         public void Add(UserViewModel userViewModel)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserViewModel, UserModel>());
-            var mapper = new Mapper(config);
-            var userModel = mapper.Map<UserViewModel, UserModel>(userViewModel);
+            var userModel = _mapper.Map<UserModel>(userViewModel);
 
             _userRepository.Add(userModel);
             _ticketDbContext.SaveChanges();
@@ -32,17 +32,14 @@ namespace CinemaOnline.BLL.Services
         {
             var user = _userRepository.GetByEmail(email);
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserModel, UserViewModel>());
-            var mapper = new Mapper(config);
-            var userViewModel = mapper.Map<UserModel, UserViewModel>(user);
+            var userViewModel = _mapper.Map<UserViewModel>(user);
+
             return userViewModel;
         }
 
         public void Update(UserViewModel userViewModel)
         {
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<UserViewModel, UserModel>());
-            var mapper = new Mapper(config);
-            var userModel = mapper.Map<UserViewModel, UserModel>(userViewModel);
+            var userModel = _mapper.Map<UserModel>(userViewModel);
 
             _userRepository.Update(userModel);
             _ticketDbContext.SaveChanges();

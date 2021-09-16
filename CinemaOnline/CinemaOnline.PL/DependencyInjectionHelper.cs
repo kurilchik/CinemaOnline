@@ -1,4 +1,5 @@
-﻿using CinemaOnline.BLL.Services;
+﻿using AutoMapper;
+using CinemaOnline.BLL.Services;
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Repositories;
@@ -7,6 +8,7 @@ using CinemaOnline.PL.ModelServices;
 using CinemaOnline.PL.ModelServices.Interfaces;
 using CinemaOnline.PL.NavigationServices;
 using CinemaOnline.PL.NavigationServices.Interfaces;
+using CinemaOnline.PL.Providers;
 using Microsoft.EntityFrameworkCore;
 using SimpleInjector;
 using SimpleInjector.Diagnostics;
@@ -46,6 +48,9 @@ namespace CinemaOnline.PL
 
             AutoRegisterWindowsForms(container);
 
+            container.Register<MapperProvider>();
+            container.RegisterSingleton(() => GetMapper(container));
+
             container.Verify();
 
             return container;
@@ -66,6 +71,12 @@ namespace CinemaOnline.PL
 
                 container.AddRegistration(type, registration);
             }
+        }
+
+        private static IMapper GetMapper(Container container)
+        {
+            var mp = container.GetInstance<MapperProvider>();
+            return mp.GetMapper();
         }
 
         private static void RegisterForm<TForm>(this Container container) where TForm : Form

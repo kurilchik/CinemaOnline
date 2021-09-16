@@ -9,10 +9,12 @@ namespace CinemaOnline.DAL.Repositories
     public class UserRepository : IUserRepository
     {
         private TicketDbContext _ticketDbContext;
+        private IMapper _mapper;
 
-        public UserRepository(TicketDbContext ticketDbContext)
+        public UserRepository(TicketDbContext ticketDbContext, IMapper mapper)
         {
             _ticketDbContext = ticketDbContext;
+            _mapper = mapper;
         }
 
         public void Add(UserModel userModel)
@@ -31,10 +33,8 @@ namespace CinemaOnline.DAL.Repositories
         public UserModel GetByEmail(string email)
         {
             var user = _ticketDbContext.Users.FirstOrDefault(u => u.Email == email);
+            var userModel = _mapper.Map<UserModel>(user);
 
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<User, UserModel>());
-            var mapper = new Mapper(config);
-            var userModel = mapper.Map<User, UserModel>(user);
             return userModel;
         }
 

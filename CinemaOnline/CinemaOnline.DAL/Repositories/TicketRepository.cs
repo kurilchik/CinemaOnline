@@ -11,10 +11,12 @@ namespace CinemaOnline.DAL.Repositories
     public class TicketRepository : ITicketRepository
     {
         private TicketDbContext _ticketDbContext;
+        private IMapper _mapper;
 
-        public TicketRepository(TicketDbContext ticketDbContext)
+        public TicketRepository(TicketDbContext ticketDbContext, IMapper mapper)
         {
             _ticketDbContext = ticketDbContext;
+            _mapper = mapper;
         }
 
         public void Add(TicketModel ticketModel)
@@ -38,10 +40,7 @@ namespace CinemaOnline.DAL.Repositories
             };
 
             var tickets = _ticketDbContext.Tickets.FromSqlRaw("CountUserTickets @UserId", param).ToList();
-
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<Ticket, TicketModel>());
-            var mapper = new Mapper(config);
-            var ticketModels = mapper.Map<List<TicketModel>>(tickets);            
+            var ticketModels = _mapper.Map<List<TicketModel>>(tickets);            
 
             return ticketModels;
         }
