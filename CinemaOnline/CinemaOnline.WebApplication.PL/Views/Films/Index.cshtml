@@ -1,0 +1,15 @@
+﻿@model FilmsViewModel
+
+<div class="d-flex align-content-around flex-wrap">
+    @foreach (var item in Model.Films)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="@item.ImgUrl" class="card-img-top" alt="@item.Name">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text">@item.Description</p>
+                <a href="#" class="btn btn-primary">BUY</a>
+            </div>
+        </div>
+    }
+</div>
