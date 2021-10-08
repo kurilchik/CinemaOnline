@@ -1,0 +1,33 @@
+﻿@model RegisterViewModel
+
+<form method="post" action="@Url.Action("Register")">
+    <div class="validation" asp-validation-summary="ModelOnly"></div>
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" name="@nameof(RegisterViewModel.Name)" class="form-control" id="name">
+    </div>
+    <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="text" name="@nameof(RegisterViewModel.Email)" class="form-control" id="email">
+        <span asp-validation-for="Email" />
+    </div>
+    <div class="mb-3">
+        <label for="password" class="form-label">Password:</label>
+        <input type="password" name="@nameof(RegisterViewModel.Password)" class="form-control" id="password">
+        <span asp-validation-for="Password" />
+    </div>
+    <div class="mb-3">
+        <label for="confirmPassword" class="form-label">Repeat password:</label>
+        <input type="password" name="@nameof(RegisterViewModel.ConfirmPassword)" class="form-control" id="confirmPassword">
+        <span asp-validation-for="ConfirmPassword" />
+    </div>
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">SIGN UP</button>
+    </div>
+</form>
+
+@section scripts{
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}

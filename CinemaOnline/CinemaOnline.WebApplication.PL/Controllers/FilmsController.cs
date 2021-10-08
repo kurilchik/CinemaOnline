@@ -1,6 +1,7 @@
 ﻿using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.WebApplication.PL.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace CinemaOnline.WebApplication.PL.Controllers
 {
+    [Authorize]
     public class FilmsController : Controller
     {
         private IFilmService _filmService;
@@ -19,6 +21,7 @@ namespace CinemaOnline.WebApplication.PL.Controllers
             _filmService = filmService;
         }
 
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var films =_filmService.GetAllFilms();

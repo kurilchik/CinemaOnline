@@ -4,16 +4,13 @@ using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Repositories;
 using CinemaOnline.DAL.Repositories.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.WebApplication.PL
 {
@@ -30,6 +27,12 @@ namespace CinemaOnline.WebApplication.PL
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
+                });
 
             services.AddDbContext<TicketDbContext>(
                 options => options.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=CinemaTicket;Trusted_Connection=True;"));
@@ -69,6 +72,7 @@ namespace CinemaOnline.WebApplication.PL
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
