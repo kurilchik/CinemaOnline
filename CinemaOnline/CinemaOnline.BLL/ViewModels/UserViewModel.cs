@@ -13,5 +13,6 @@ namespace CinemaOnline.BLL.ViewModels
         public string Email { get; set; }
         public string Password { get; set; }
         public float Balance { get; set; }
+        public List<UserTicketViewModel> Tickets { get; set; }
     }
 }

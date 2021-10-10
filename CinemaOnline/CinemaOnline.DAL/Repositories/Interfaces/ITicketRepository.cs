@@ -1,16 +1,12 @@
-﻿using CinemaOnline.DAL.DataModels;
-using CinemaOnline.DAL.Models;
-using System;
+﻿using CinemaOnline.DAL.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.DAL.Repositories.Interfaces
 {
     public interface ITicketRepository
     {
         void Add(TicketModel ticketModel);
+        List<UserTicketModel> GetUserTicketsById(int userId);
         List<TicketModel> GetListByUserId(int userId);
     }
 }

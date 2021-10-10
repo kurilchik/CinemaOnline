@@ -11,18 +11,18 @@
             @foreach (var item in Model.Films)
             {
                 <div class="col">
-                    <div class="card shadow-sm">
+                    <div class="card shadow-sm" style="width: 20rem;">
                         <img src="@item.ImgUrl" class="img-responsive" alt="@item.Name">
                         <div class="card-body">
                             <h5 class="card-title">@item.Name</h5>
                             <p class="card-text">@item.Description</p>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="d-grid gap-2">
-                            <a class="btn btn-primary" href="~/Films/Film?id=@item.Id" role="button">Buy</a>
+                        <div class="card-footer">
+                            <div class="d-grid gap-2">
+                                <a class="btn btn-primary" href="~/Films/Film?id=@item.Id" role="button">Buy</a>
+                            </div>
                         </div>
-                    </div>
+                    </div>                    
                 </div>
             }
 

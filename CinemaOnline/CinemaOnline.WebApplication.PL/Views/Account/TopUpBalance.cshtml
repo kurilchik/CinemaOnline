@@ -1,0 +1,18 @@
+﻿<div class="card text-center">
+    <div class="card-header">
+        Top up balance
+    </div>
+    <div class="card-body">
+        <form class="row g-3" method="post" asp-action="TopUpBalance" asp-controller="Account">
+            <div class="col-auto">
+                <label for="cardNumber" class="form-label">Enter card number:</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" name="cardNumber" placeholder="Number">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Top up</button>
+            </div>
+        </form>
+    </div>
+</div>

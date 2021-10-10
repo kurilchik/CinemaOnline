@@ -6,14 +6,19 @@
             Account
         </div>
         <div class="card-body">
-            <h3>
+            <h4>
                 Name:
                 <small class="text-muted">@Model.Name</small>
-            </h3>
-            <h3>
+            </h4>
+            <h4>
                 Email:
                 <small class="text-muted">@Model.Email</small>
-            </h3>
+            </h4>
+            <h4>
+                Balance:
+                <small class="text-muted">@Model.Balance BYN</small>
+            </h4>
+            <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Account" asp-action="TopUpBalance">TopUp Balance</a>
         </div>
         <div class="card-footer">
             <div class="accordion accordion-flush" id="accordionFlushExample">
@@ -29,29 +34,23 @@
                                 <thead>
                                     <tr>
                                         <th scope="col">#</th>
-                                        <th scope="col">First</th>
-                                        <th scope="col">Last</th>
-                                        <th scope="col">Handle</th>
+                                        <th scope="col">Film</th>
+                                        <th scope="col">Cinema</th>
+                                        <th scope="col">Time</th>
+                                        <th scope="col">Price</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">2</th>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">3</th>
-                                        <td colspan="2">Larry the Bird</td>
-                                        <td>@@twitter</td>
-                                    </tr>
+                                    @foreach (var item in Model.Tickets.Select((value, index) => new { value, index }))
+                                    {
+                                        <tr>
+                                            <th scope="row">@(item.index + 1)</th>
+                                            <td>@item.value.FilmName</td>
+                                            <td>@item.value.CinemaName</td>
+                                            <td>@item.value.Time</td>
+                                            <td>@item.value.Price</td>
+                                        </tr>
+                                    }
                                 </tbody>
                             </table>
                         </div>

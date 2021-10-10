@@ -16,10 +16,14 @@ namespace CinemaOnline.WebApplication.PL.Controllers
     public class AccountController : Controller
     {
         private IUserService _userService;
+        private ITicketService _ticketService;
+        private ITopUpService _topUpService;
 
-        public AccountController(IUserService userService)
+        public AccountController(IUserService userService, ITicketService ticketService, ITopUpService topUpService)
         {
             _userService = userService;
+            _ticketService = ticketService;
+            _topUpService = topUpService;
         }
         public IActionResult Index()
         {
@@ -63,7 +67,7 @@ namespace CinemaOnline.WebApplication.PL.Controllers
                 var user = _userService.GetByEmail(model.Email);
                 if (user == null)
                 {
-                    _userService.Add(new UserViewModel { Name = model.Name, Email = model.Email, Password = model.Password});
+                    _userService.Add(new UserViewModel { Name = model.Name, Email = model.Email, Password = model.Password });
 
                     await Authenticate(model.Email);
 
@@ -81,7 +85,25 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         {
             var email = User.Claims.FirstOrDefault(t => t.Type == ClaimTypes.Email).Value;
             var user = _userService.GetByEmail(email);
+            user.Tickets = _ticketService.GetListByUserId(user.Id);
             return View(user);
+        }
+
+        [HttpGet]
+        public IActionResult TopUpBalance()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult TopUpBalance(string cardNumber)
+        {
+            var email = User.Claims.FirstOrDefault(t => t.Type == ClaimTypes.Email).Value;
+            var user = _userService.GetByEmail(email);
+            user.Balance += _topUpService.TopUpCard(cardNumber);
+            _userService.Update(user);
+            return RedirectToAction("Cabinet");
         }
 
         [Authorize]
