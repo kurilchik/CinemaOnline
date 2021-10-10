@@ -35,5 +35,17 @@ namespace CinemaOnline.WebApplication.PL.Controllers
 
             return View(filmsView);
         }
+
+        [AllowAnonymous]        
+        public IActionResult Film([FromQuery] int id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var film = _filmService.GetFilmById(id);
+                film = _filmService.GetSessions(film);
+                return View(film);
+            }
+            return RedirectToAction("Login", "Account");
+        }
     }
 }

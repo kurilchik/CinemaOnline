@@ -77,6 +77,14 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         }
 
         [Authorize]
+        public IActionResult Cabinet()
+        {
+            var email = User.Claims.FirstOrDefault(t => t.Type == ClaimTypes.Email).Value;
+            var user = _userService.GetByEmail(email);
+            return View(user);
+        }
+
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

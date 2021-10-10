@@ -9,6 +9,7 @@ namespace CinemaOnline.DAL.Repositories.Interfaces
 {
     public interface IFilmRepository
     {
+        FilmModel GetById(int id);
         List<FilmModel> GetAllFilms();
     }
 }

@@ -1,0 +1,46 @@
+﻿@using CinemaOnline.BLL.ViewModels;
+@model FilmViewModel
+
+<div class="card mb-3">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Model.ImgUrl" class="img-fluid rounded-start" alt="@Model.Name">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">@Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+            </div>
+            <div class="card-footer">
+                <div class="row g-2">
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid" aria-label="Cinema">
+                                <option selected>Choose a cinema</option>
+                                @foreach (var item in @Model.Sessions.Select(s => s.CinemaName).Distinct().ToList())
+                                {
+                                    <option value="@item">@item</option>
+                                }
+                            </select>
+                            <label for="floatingSelectGrid">Cinema</label>
+                        </div>
+                    </div>
+                    <div class="col-md">
+                        <div class="form-floating">
+                            <select class="form-select" id="floatingSelectGrid" aria-label="Time">
+                                <option selected>Choose time</option>
+                                
+                            </select>
+                            <label for="floatingSelectGrid">Time</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="d-grid gap-2">
+                <a class="btn btn-primary" href="#" role="button">Buy</a>
+            </div>
+        </div>
+    </div>    
+</div>

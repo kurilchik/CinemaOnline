@@ -28,21 +28,14 @@ namespace CinemaOnline.WebApplication.PL
         {
             services.AddControllersWithViews();
 
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<TicketDbContext>(options => options.UseSqlServer(connection));
+
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
-
-            services.AddDbContext<TicketDbContext>(
-                options => options.UseSqlServer("Server=(LocalDb)\\MSSQLLocalDB;Database=CinemaTicket;Trusted_Connection=True;"));
-
-            var mapperConfig = new MapperConfiguration(mc =>
-            {
-                mc.AddProfile(new MappingProfile());
-            });
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ITicketService, TicketService>();
@@ -55,6 +48,12 @@ namespace CinemaOnline.WebApplication.PL
             services.AddTransient<IFilmRepository, FilmRepository>();
             services.AddTransient<ISessionRepository, SessionRepository>();
 
+            var mapperConfig = new MapperConfiguration(mc =>
+                {
+                   mc.AddProfile(new MappingProfile());
+                 });
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

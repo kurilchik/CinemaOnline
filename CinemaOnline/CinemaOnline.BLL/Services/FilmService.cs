@@ -22,11 +22,18 @@ namespace CinemaOnline.BLL.Services
             _mapper = mapper;
         }
 
+        public FilmViewModel GetFilmById(int id)
+        {
+            var film = _mapper.Map<FilmViewModel>(_filmRepository.GetById(id));
+            return film;
+        }
+
         public List<FilmViewModel> GetAllFilms()
         {
             var films = _mapper.Map<List<FilmViewModel>>(_filmRepository.GetAllFilms());
             return films;
         }
+
         public FilmViewModel GetSessions(FilmViewModel film)
         {
             film.Sessions = GetSessionByFilmId(film.Id);
