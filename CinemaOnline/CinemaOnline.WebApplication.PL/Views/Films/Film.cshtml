@@ -15,7 +15,7 @@
                 <div class="row g-2">
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Cinema">
+                            <select class="form-select cinema-selection" id="floatingSelectGrid" aria-label="Cinema">
                                 <option selected>Choose a cinema</option>
                                 @foreach (var item in @Model.Sessions.Select(s => s.CinemaName).Distinct().ToList())
                                 {
@@ -27,9 +27,9 @@
                     </div>
                     <div class="col-md">
                         <div class="form-floating">
-                            <select class="form-select" id="floatingSelectGrid" aria-label="Time">
+                            <select class="form-select cinema-time-selection" id="floatingSelectGrid" aria-label="Time">
                                 <option selected>Choose time</option>
-                                
+
                             </select>
                             <label for="floatingSelectGrid">Time</label>
                         </div>
@@ -42,5 +42,19 @@
                 <a class="btn btn-primary" href="#" role="button">Buy</a>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
+
+@{
+    int proID = 123;
+    int nonProID = 456;
+}
+
+<script>
+
+    var nonID = @nonProID;
+    var proID = @proID;
+    window.nonID = @nonProID;
+    window.proID = @proID;
+
+</script>
