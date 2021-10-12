@@ -37,16 +37,16 @@ namespace CinemaOnline.WebApplication.PL
                     options.LoginPath = new Microsoft.AspNetCore.Http.PathString("/Account/Login");
                 });
 
-            services.AddTransient<IUserService, UserService>();
-            services.AddTransient<ITicketService, TicketService>();
-            services.AddTransient<IFilmService, FilmService>();
-            services.AddTransient<ITopUpService, TopUpService>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IFilmService, FilmService>();
+            services.AddScoped<ITopUpService, TopUpService>();
 
-            services.AddTransient<IUserRepository, UserRepository>();
-            services.AddTransient<ITopUpRepository, TopUpRepository>();
-            services.AddTransient<ITicketRepository, TicketRepository>();
-            services.AddTransient<IFilmRepository, FilmRepository>();
-            services.AddTransient<ISessionRepository, SessionRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITopUpRepository, TopUpRepository>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
+            services.AddScoped<IFilmRepository, FilmRepository>();
+            services.AddScoped<ISessionRepository, SessionRepository>();
 
             var mapperConfig = new MapperConfiguration(mc =>
                 {
