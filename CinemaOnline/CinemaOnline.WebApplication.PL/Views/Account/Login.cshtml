@@ -4,21 +4,13 @@
     <div class="validation" asp-validation-summary="ModelOnly"></div>
     <div class="mb-3">
         <label for="email" class="form-label">Email:</label>
-        <input type="text" name="@nameof(LoginViewModel.Email)" class="form-control" id="email">
+        <input type="text" name="@nameof(LoginViewModel.Email)" class="form-control" id="email" required>
     </div>
     <div class="mb-3">
         <label for="password" class="form-label">Password:</label>
-        <input type="password" name="@nameof(LoginViewModel.Password)" class="form-control" id="password">
+        <input type="password" name="@nameof(LoginViewModel.Password)" class="form-control" id="password" required>
     </div>
     <div class="col-auto">
         <button type="submit" class="btn btn-primary mb-3">SIGN IN</button>
     </div>
 </form>
-
-
-
-@section scripts{
-
-    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
-    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
-}

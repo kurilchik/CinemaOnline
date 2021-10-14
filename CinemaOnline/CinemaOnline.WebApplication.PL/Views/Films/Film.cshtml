@@ -1,5 +1,8 @@
 ﻿@using CinemaOnline.BLL.ViewModels;
 @model FilmViewModel
+@{
+    int a = 0;
+}
 
 <div class="card mb-3">
     <div class="row g-0">
@@ -10,51 +13,43 @@
             <div class="card-body">
                 <h5 class="card-title">@Model.Name</h5>
                 <p class="card-text">@Model.Description</p>
-            </div>
-            <div class="card-footer">
-                <div class="row g-2">
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select cinema-selection" id="floatingSelectGrid" aria-label="Cinema">
-                                <option selected>Choose a cinema</option>
-                                @foreach (var item in @Model.Sessions.Select(s => s.CinemaName).Distinct().ToList())
-                                {
-                                    <option value="@item">@item</option>
-                                }
-                            </select>
-                            <label for="floatingSelectGrid">Cinema</label>
-                        </div>
-                    </div>
-                    <div class="col-md">
-                        <div class="form-floating">
-                            <select class="form-select cinema-time-selection" id="floatingSelectGrid" aria-label="Time">
-                                <option selected>Choose time</option>
+                <p class="card-text">Genres: @string.Join(", ", Model.Genres)</p>                
+                <div class="accordion accordion-flush" id="accordionFlush">
+                    @foreach (var item in @Model.Sessions.Select(t => t.Time.Date).Distinct().ToList())
+                    {
+                        a++;
 
-                            </select>
-                            <label for="floatingSelectGrid">Time</label>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="flush-heading-@a">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse-@a" aria-expanded="false" aria-controls="flush-collapse-@a">
+                                    @item.ToString("dd.MM.yyyy")
+                                </button>
+                            </h2>
+                            <div id="flush-collapse-@a" class="accordion-collapse collapse" aria-labelledby="flush-heading-@a" data-bs-parent="#accordionFlush">
+                                <div class="accordion-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            @foreach (var cinema in @Model.Sessions.Where(t => t.Time.Date == item).Select(c => c.CinemaName).Distinct().ToList())
+                                            {
+                                                <div class="col-6 col-sm-4 order-first">
+                                                    @cinema
+                                                </div>
+                                                <div class="col order-last">
+                                                    @foreach (var time in @Model.Sessions.Where(t => t.Time.Date == item).Select(t => t.Time.Hour).ToList())
+                                                    {
+                                                        <button type="button" class="btn btn-outline-success">@time</button>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+
+                    }
                 </div>
-            </div>
-        </div>
-        <div class="card-footer">
-            <div class="d-grid gap-2">
-                <a class="btn btn-primary" href="#" role="button">Buy</a>
-            </div>
-        </div>
+            </div>            
+        </div>            
     </div>
 </div>
-
-@{
-    int proID = 123;
-    int nonProID = 456;
-}
-
-<script>
-
-    var nonID = @nonProID;
-    var proID = @proID;
-    window.nonID = @nonProID;
-    window.proID = @proID;
-
-</script>
