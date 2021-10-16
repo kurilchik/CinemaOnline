@@ -6,18 +6,29 @@
             Account
         </div>
         <div class="card-body">
-            <h4>
-                Name:
-                <small class="text-muted">@Model.Name</small>
-            </h4>
-            <h4>
-                Email:
-                <small class="text-muted">@Model.Email</small>
-            </h4>
-            <h4>
-                Balance:
-                <small class="text-muted">@Model.Balance BYN</small>
-            </h4>
+            <div class="card mb-3" style="max-width: 540px;">
+                <div class="row g-0">
+                    <div class="col-md-4">
+                        <img src="https://mmlrim.com/wp-content/uploads/2017/03/78-785827_user-profile-avatar-login-account-male-user-icon.png" class="img-fluid rounded-start" alt="account">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4>
+                                Name:
+                                <small class="text-muted">@Model.Name</small>
+                            </h4>
+                            <h4>
+                                Email:
+                                <small class="text-muted">@Model.Email</small>
+                            </h4>
+                            <h4>
+                                Balance:
+                                <small class="text-muted">@Model.Balance BYN</small>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>            
             <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Account" asp-action="TopUpBalance">TopUp Balance</a>
         </div>
         <div class="card-footer">
