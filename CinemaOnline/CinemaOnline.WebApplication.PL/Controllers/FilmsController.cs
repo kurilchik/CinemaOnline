@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CinemaOnline.WebApplication.PL.Controllers
@@ -15,10 +16,14 @@ namespace CinemaOnline.WebApplication.PL.Controllers
     public class FilmsController : Controller
     {
         private IFilmService _filmService;
+        private IUserService _userService;
+        private ITicketService _ticketService;
 
-        public FilmsController(IFilmService filmService)
+        public FilmsController(IFilmService filmService, IUserService userService, ITicketService ticketService)
         {
             _filmService = filmService;
+            _userService = userService;
+            _ticketService = ticketService;
         }
 
         [AllowAnonymous]
@@ -35,17 +40,29 @@ namespace CinemaOnline.WebApplication.PL.Controllers
 
             return View(filmsView);
         }
-
-        [AllowAnonymous]        
+    
         public IActionResult Film([FromQuery] int id)
         {
-            if (User.Identity.IsAuthenticated)
+            var film = _filmService.GetFilmById(id);
+            film = _filmService.GetSessions(film);
+            return View(film);
+        }
+
+        public IActionResult Payment([FromForm] SessionDTO session)
+        {
+            return View(session);
+        }
+
+        public IActionResult Buy([FromForm] TicketDTO ticket)
+        {
+            var user = _userService.GetByEmail(User.Claims.FirstOrDefault(t => t.Type == ClaimTypes.Email).Value);
+            if (user.Balance >= ticket.Price)
             {
-                var film = _filmService.GetFilmById(id);
-                film = _filmService.GetSessions(film);
-                return View(film);
-            }
-            return RedirectToAction("Login", "Account");
+                user.Balance -= ticket.Price;
+                _userService.Update(user);
+                _ticketService.Add(user.Id, ticket.SessionId);
+            }             
+            return RedirectToAction("Index", "Films");
         }
     }
 }

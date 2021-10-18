@@ -9,6 +9,7 @@ namespace CinemaOnline.DAL.Repositories.Interfaces
 {
     public interface ISessionRepository
     {
+        SessionModel GetById(int id);
         List<SessionModel> GetListSessionsByFilmId(int filmId);
     }
 }

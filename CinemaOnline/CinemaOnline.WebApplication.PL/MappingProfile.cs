@@ -17,6 +17,7 @@ namespace CinemaOnline.WebApplication.PL
             CreateMap<UserModel, UserViewModel>();
             CreateMap<User, UserModel>();
             CreateMap<FilmModel, FilmViewModel>().ForMember(dest => dest.Sessions, opt => opt.Ignore());
+            CreateMap<Session, SessionModel>();
             CreateMap<SessionModel, SessionViewModel>();
             CreateMap<Ticket, TicketModel>();
             CreateMap<UserTicketModel, UserTicketViewModel>();

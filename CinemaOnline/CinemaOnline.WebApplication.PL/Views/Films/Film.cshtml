@@ -12,7 +12,7 @@
                 <p class="card-text">@Model.Description</p>
                 <p class="card-text">Genres: @string.Join(", ", Model.Genres)</p>                
                 <div class="accordion accordion-flush" id="accordionFlush">
-                    @foreach (var date in @Model.Sessions.Select(t => t.Time.Date).Distinct().Select((value, index) => new { value, index }))
+                    @foreach (var date in @Model.Sessions.Select(s => s.Time.Date).Distinct().Select((value, index) => new { value, index }))
                     {
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="flush-heading-@date.index">
@@ -25,7 +25,7 @@
                                     <div class="container">
                                         <div class="row">
                                             <ul class="list-group">
-                                                @foreach (var cinema in @Model.Sessions.Where(t => t.Time.Date == date.value).Select(c => c.CinemaName).Distinct().ToList())
+                                                @foreach (var cinema in @Model.Sessions.Where(s => s.Time.Date == date.value).Select(c => c.CinemaName).Distinct().ToList())
                                                 {
                                                 <li class="list-group-item">
                                                     <div class="container">
@@ -34,9 +34,16 @@
                                                                 @cinema
                                                             </div>
                                                             <div class="col">
-                                                                @foreach (var time in @Model.Sessions.Where(t => t.Time.Date == date.value).Select(t => t.Time).OrderBy(t => t.Hour).Distinct().ToList())
+                                                                @foreach (var time in @Model.Sessions.Where(s => s.Time.Date == date.value && s.CinemaName == cinema).Select(t => t.Time).OrderBy(t => t.Hour).ToList())
                                                                 {
-                                                                    <button type="button" class="btn btn-outline-info">@time.ToString("H:mm")</button>
+                                                                    <form method="post" asp-action="Payment" asp-controller="Films">
+                                                                        <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Id" name="Id" />
+                                                                        <input type="hidden" value="@Model.Name" name="FilmName" />
+                                                                        <input type="hidden" value="@cinema" name="CinemaName" />
+                                                                        <input type="hidden" value="@time" name="Time" />
+                                                                        <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Price" name="Price" />
+                                                                        <button type="submit" class="btn btn-outline-info">@time.ToString("H:mm")</button>
+                                                                    </form>
                                                                 }
                                                             </div>                                                            
                                                         </div>                                                        
