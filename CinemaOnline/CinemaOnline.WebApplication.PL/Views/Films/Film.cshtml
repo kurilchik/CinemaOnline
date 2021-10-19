@@ -30,20 +30,22 @@
                                                 <li class="list-group-item">
                                                     <div class="container">
                                                         <div class="row align-items-start">
-                                                            <div class="col-6 col-sm-4">
+                                                            <div class="col-4">
                                                                 @cinema
                                                             </div>
-                                                            <div class="col">
+                                                            <div class="col-8">
                                                                 @foreach (var time in @Model.Sessions.Where(s => s.Time.Date == date.value && s.CinemaName == cinema).Select(t => t.Time).OrderBy(t => t.Hour).ToList())
                                                                 {
-                                                                    <form method="post" asp-action="Payment" asp-controller="Films">
-                                                                        <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Id" name="Id" />
-                                                                        <input type="hidden" value="@Model.Name" name="FilmName" />
-                                                                        <input type="hidden" value="@cinema" name="CinemaName" />
-                                                                        <input type="hidden" value="@time" name="Time" />
-                                                                        <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Price" name="Price" />
-                                                                        <button type="submit" class="btn btn-outline-info">@time.ToString("H:mm")</button>
-                                                                    </form>
+                                                                    <div class="d-inline-flex p-2 bd-highlight">
+                                                                        <form method="post" class="" asp-action="Payment" asp-controller="Films">
+                                                                            <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Id" name="Id" />
+                                                                            <input type="hidden" value="@Model.Name" name="FilmName" />
+                                                                            <input type="hidden" value="@cinema" name="CinemaName" />
+                                                                            <input type="hidden" value="@time" name="Time" />
+                                                                            <input type="hidden" value="@Model.Sessions.FirstOrDefault(s => s.Time == time && s.CinemaName == cinema).Price" name="Price" />
+                                                                            <button type="submit" class="btn btn-outline-info">@time.ToString("H:mm")</button>
+                                                                        </form>
+                                                                    </div>
                                                                 }
                                                             </div>                                                            
                                                         </div>                                                        

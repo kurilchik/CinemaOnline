@@ -50,10 +50,9 @@ namespace CinemaOnline.WebApplication.PL
 
             var mapperConfig = new MapperConfiguration(mc =>
                 {
-                   mc.AddProfile(new MappingProfile());
+                   mc.AddProfile<MappingProfile>();
                  });
-            IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddSingleton<IMapper>(sp => new Mapper(mapperConfig));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

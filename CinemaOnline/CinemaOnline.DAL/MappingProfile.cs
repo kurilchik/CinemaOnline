@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using CinemaOnline.BLL.ViewModels;
+using CinemaOnline.DAL.DataModels;
+using CinemaOnline.DAL.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace CinemaOnline.WebApplication.PL
+namespace CinemaOnline.DAL
 {
     public class MappingProfile : Profile
     {
