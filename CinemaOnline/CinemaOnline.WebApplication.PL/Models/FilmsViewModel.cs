@@ -8,6 +8,6 @@ namespace CinemaOnline.WebApplication.PL.Models
 {
     public class FilmsViewModel
     {
-        public List<FilmViewModel> Films { get; set; }
+        public List<FilmDTO> Films { get; set; }
     }
 }

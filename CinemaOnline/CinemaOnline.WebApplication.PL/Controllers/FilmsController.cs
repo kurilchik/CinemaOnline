@@ -1,4 +1,5 @@
-﻿using CinemaOnline.BLL.Services.Interfaces;
+﻿using AutoMapper;
+using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.WebApplication.PL.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -18,20 +19,22 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         private IFilmService _filmService;
         private IUserService _userService;
         private ITicketService _ticketService;
+        private IMapper _mapper;
 
-        public FilmsController(IFilmService filmService, IUserService userService, ITicketService ticketService)
+        public FilmsController(IFilmService filmService, IUserService userService, ITicketService ticketService, IMapper mapper)
         {
             _filmService = filmService;
             _userService = userService;
             _ticketService = ticketService;
+            _mapper = mapper;
         }
 
         [AllowAnonymous]
         public IActionResult Index()
         {
-            var films =_filmService.GetAllFilms();
+            var films = _mapper.Map<List<FilmDTO>>(_filmService.GetAllFilms());
 
-            var filmsView = new FilmsViewModel() { Films = new List<FilmViewModel>() };
+            var filmsView = new FilmsViewModel() { Films = new List<FilmDTO>() };
 
             foreach (var item in films)
             {
@@ -45,7 +48,8 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         {
             var film = _filmService.GetFilmById(id);
             film = _filmService.GetSessions(film);
-            return View(film);
+            var filmDTO = _mapper.Map<FilmDTO>(film);
+            return View(filmDTO);
         }
 
         public IActionResult Payment([FromForm] SessionDTO session)

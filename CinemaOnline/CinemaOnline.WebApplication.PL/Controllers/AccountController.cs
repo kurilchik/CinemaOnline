@@ -1,4 +1,5 @@
-﻿using CinemaOnline.BLL.Services.Interfaces;
+﻿using AutoMapper;
+using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.WebApplication.PL.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -18,12 +19,14 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         private IUserService _userService;
         private ITicketService _ticketService;
         private ITopUpService _topUpService;
+        private IMapper _mapper;
 
-        public AccountController(IUserService userService, ITicketService ticketService, ITopUpService topUpService)
+        public AccountController(IUserService userService, ITicketService ticketService, ITopUpService topUpService, IMapper mapper)
         {
             _userService = userService;
             _ticketService = ticketService;
             _topUpService = topUpService;
+            _mapper = mapper;
         }
         public IActionResult Index()
         {
@@ -41,7 +44,7 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = _userService.GetByEmail(model.Email);
+                var user = _mapper.Map<UserDTO>(_userService.GetByEmail(model.Email));
                 if (user != null && model.Password == user.Password)
                 {
                     await Authenticate(model.Email);
@@ -84,8 +87,8 @@ namespace CinemaOnline.WebApplication.PL.Controllers
         public IActionResult Cabinet()
         {
             var email = User.Claims.FirstOrDefault(t => t.Type == ClaimTypes.Email).Value;
-            var user = _userService.GetByEmail(email);
-            user.Tickets = _ticketService.GetListByUserId(user.Id);
+            var user = _mapper.Map<UserDTO>(_userService.GetByEmail(email));
+            user.Tickets = _mapper.Map<List<UserTicketDTO>>(_ticketService.GetListByUserId(user.Id));
             return View(user);
         }
 

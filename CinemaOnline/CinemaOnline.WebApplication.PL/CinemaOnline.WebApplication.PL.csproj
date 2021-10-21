@@ -13,4 +13,8 @@
     <ProjectReference Include="..\CinemaOnline.BLL\CinemaOnline.BLL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
