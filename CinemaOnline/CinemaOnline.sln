@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaOnline.BLL", "CinemaO
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaOnline.WindowsForms.PL", "CinemaOnline.PL\CinemaOnline.WindowsForms.PL.csproj", "{7098275D-5DBE-4E9F-9CC6-61E3C87966B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaOnline.WebApplication.PL", "CinemaOnline.WebApplication.PL\CinemaOnline.WebApplication.PL.csproj", "{D3A4C8DD-FD90-4A64-B882-6D9978974F65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CinemaOnline.WebApplication.PL", "CinemaOnline.WebApplication.PL\CinemaOnline.WebApplication.PL.csproj", "{D3A4C8DD-FD90-4A64-B882-6D9978974F65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CinemaOnline.WebAPI.PL", "CinemaOnline.WebAPI.PL\CinemaOnline.WebAPI.PL.csproj", "{A354F8B9-C233-4D54-94AB-B69EFEBCC402}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D3A4C8DD-FD90-4A64-B882-6D9978974F65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D3A4C8DD-FD90-4A64-B882-6D9978974F65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D3A4C8DD-FD90-4A64-B882-6D9978974F65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A354F8B9-C233-4D54-94AB-B69EFEBCC402}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A354F8B9-C233-4D54-94AB-B69EFEBCC402}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A354F8B9-C233-4D54-94AB-B69EFEBCC402}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A354F8B9-C233-4D54-94AB-B69EFEBCC402}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
