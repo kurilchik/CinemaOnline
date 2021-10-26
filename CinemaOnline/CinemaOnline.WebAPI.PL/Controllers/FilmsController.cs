@@ -20,19 +20,19 @@ namespace CinemaOnline.WebAPI.PL.Controllers
         }
 
         [HttpGet]
-        public List<FilmDTO> GetFilms()
+        public IActionResult GetFilms()
         {
             var films = _filmService.GetAllFilms();
             var models = _mapper.Map<List<FilmDTO>>(films);
-            return models;
+            return Ok(models);
         }
 
         [HttpGet("{id}")]
-        public FilmDTO GetFilms(int id)
+        public IActionResult GetFilms(int id)
         {
             var film = _filmService.GetFilmById(id);
             var model = _mapper.Map<FilmDTO>(film);
-            return model;
+            return Ok(model);
         }
     }
 }

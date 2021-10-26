@@ -25,24 +25,25 @@ namespace CinemaOnline.WebAPI.PL.Controllers
         }
 
         [HttpPost]
-        public UserDTO GetByEmail([FromBody] string email)
+        public IActionResult GetByEmail([FromBody] string email)
         {
             var user = _userService.GetByEmail(email);
             var model = _mapper.Map<UserDTO>(user);
-            return model;
+            return Ok(model);
         }
 
         [HttpPost]
-        public void PutUser([FromBody] AddUserDTO userDTO)
+        public IActionResult PutUser([FromBody] AddUserDTO userDTO)
         {
             var user = _userService.GetByEmail(userDTO.Email);
             if (user == null)
             {
-                _userService.Add(_mapper.Map<UserViewModel>(userDTO));           
+                _userService.Add(_mapper.Map<UserViewModel>(userDTO));
+                return Ok();
             }
             else
             {
-                BadRequest();
+                return BadRequest("User exists");
             }
         }
     }
