@@ -11,6 +11,8 @@ namespace CinemaOnline.DAL.Repositories.Interfaces
     {
         void Add(UserModel userModel);
         UserModel GetByEmail(string email);
+        List<string> GetAllUsers();
         void Update(UserModel userModel);
+        void Delete(string email);
     }
 }

@@ -4,6 +4,7 @@ using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
 using CinemaOnline.DAL.Repositories.Interfaces;
+using System.Collections.Generic;
 
 namespace CinemaOnline.BLL.Services
 {
@@ -37,11 +38,24 @@ namespace CinemaOnline.BLL.Services
             return userViewModel;
         }
 
+        public List<string> GetAllUsers()
+        {
+            var users = _userRepository.GetAllUsers();
+
+            return users;
+        }
+
         public void Update(UserViewModel userViewModel)
         {
             var userModel = _mapper.Map<UserModel>(userViewModel);
 
             _userRepository.Update(userModel);
+            _ticketDbContext.SaveChanges();
+        }
+
+        public void Delete(string email)
+        {
+            _userRepository.Delete(email);
             _ticketDbContext.SaveChanges();
         }
     }

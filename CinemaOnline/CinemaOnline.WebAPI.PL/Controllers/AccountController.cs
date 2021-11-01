@@ -2,12 +2,7 @@
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.WebAPI.PL.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace CinemaOnline.WebAPI.PL.Controllers
 {
@@ -24,16 +19,31 @@ namespace CinemaOnline.WebAPI.PL.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
-        public IActionResult GetByEmail([FromBody] string email)
+        [HttpGet]
+        public IActionResult GetUsers()
         {
-            var user = _userService.GetByEmail(email);
-            var model = _mapper.Map<UserDTO>(user);
-            return Ok(model);
+            var users = _userService.GetAllUsers();
+            return Ok(users);
         }
 
         [HttpPost]
-        public IActionResult PutUser([FromBody] AddUserDTO userDTO)
+        public IActionResult GetUser([FromBody] GetUserDTO userDTO)
+        {
+            var user = _userService.GetByEmail(userDTO.Email);
+            if (user != null && user.Password == userDTO.Password)
+            {
+                var model = _mapper.Map<UserDTO>(user);
+                return Ok(model);
+            }
+            else
+            {
+                return BadRequest();
+            }
+            
+        }
+
+        [HttpPost]
+        public IActionResult AddUser([FromBody] AddUserDTO userDTO)
         {
             var user = _userService.GetByEmail(userDTO.Email);
             if (user == null)
@@ -44,6 +54,36 @@ namespace CinemaOnline.WebAPI.PL.Controllers
             else
             {
                 return BadRequest("User exists");
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateBalance([FromBody] UpdateUserDTO userDTO)
+        {
+            var user = _userService.GetByEmail(userDTO.Email);
+            if (user != null && user.Password == userDTO.Password)
+            {
+                _userService.Update(_mapper.Map<UserViewModel>(userDTO));
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
+            }
+        }
+
+        [HttpDelete]
+        public IActionResult Delete([FromBody] DeleteUserDTO userDTO)
+        {
+            var user = _userService.GetByEmail(userDTO.Email);
+            if (user != null && user.Password == userDTO.Password)
+            {
+                _userService.Delete(userDTO.Email);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
     }

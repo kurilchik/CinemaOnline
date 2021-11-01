@@ -2,6 +2,7 @@
 using CinemaOnline.DAL.DataModels;
 using CinemaOnline.DAL.Models;
 using CinemaOnline.DAL.Repositories.Interfaces;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace CinemaOnline.DAL.Repositories
@@ -38,10 +39,23 @@ namespace CinemaOnline.DAL.Repositories
             return userModel;
         }
 
+        public List<string> GetAllUsers()
+        {
+            var users = _ticketDbContext.Users.Select(u => u.Email).ToList();
+
+            return users;
+        }
+
         public void Update(UserModel userModel)
         {
             var user = _ticketDbContext.Users.FirstOrDefault(u => u.Email == userModel.Email);
             user.Balance = userModel.Balance;
+        }
+
+        public void Delete(string email)
+        {
+            var user = _ticketDbContext.Users.FirstOrDefault(u => u.Email == email);
+            _ticketDbContext.Users.Remove(user);
         }
     }
 }

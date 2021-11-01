@@ -11,6 +11,8 @@ namespace CinemaOnline.BLL.Services.Interfaces
     {
         void Add(UserViewModel userViewModel);
         UserViewModel GetByEmail(string email);
+        List<string> GetAllUsers();
         void Update(UserViewModel userViewModel);
+        void Delete(string email);
     }
 }
