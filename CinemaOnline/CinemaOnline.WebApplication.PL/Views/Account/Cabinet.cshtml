@@ -1,71 +1,92 @@
 ﻿@model UserDTO
 
-    <div class="card">
-        <div class="card-header">
-            Account
-        </div>
-        <div class="card-body">
-            <div class="card mb-3" style="max-width: 540px;">
-                <div class="row g-0">
-                    <div class="col-md-4">
-                        <img src="/images/avatar.png" class="img-fluid rounded-start" alt="account">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <h4>
-                                Name:
-                                <small class="text-muted">@Model.Name</small>
-                            </h4>
-                            <h4>
-                                Email:
-                                <small class="text-muted">@Model.Email</small>
-                            </h4>
-                            <h4>
-                                Balance:
-                                <small class="text-muted">@Model.Balance BYN</small>
-                            </h4>
-                        </div>
+<div class="card">
+    <div class="card-header">
+        Account
+    </div>
+    <div class="card-body">
+        <div class="card mb-3" style="max-width: 540px;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="/images/avatar.png" class="img-fluid rounded-start" alt="account">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h4>
+                            Name:
+                            <small class="text-muted">@Model.Name</small>
+                        </h4>
+                        <h4>
+                            Email:
+                            <small class="text-muted">@Model.Email</small>
+                        </h4>
+                        <h4>
+                            Balance:
+                            <small class="text-muted">@Model.Balance BYN</small>
+                        </h4>
                     </div>
                 </div>
-            </div>            
-            <a class="btn btn-primary btn-lg" asp-area="" asp-controller="Account" asp-action="TopUpBalance">TopUp Balance</a>
-        </div>
-        <div class="card-footer">
-            <div class="accordion accordion-flush" id="accordionFlushExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-headingOne">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                            Ticket List
-                        </button>
-                    </h2>
-                    <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                        <div class="accordion-body">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Film</th>
-                                        <th scope="col">Cinema</th>
-                                        <th scope="col">Time</th>
-                                        <th scope="col">Price</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var item in Model.Tickets.Select((value, index) => new { value, index }))
-                                    {
-                                        <tr>
-                                            <th scope="row">@(item.index + 1)</th>
-                                            <td>@item.value.FilmName</td>
-                                            <td>@item.value.CinemaName</td>
-                                            <td>@item.value.Time</td>
-                                            <td>@item.value.Price</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>                
             </div>
         </div>
     </div>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Top Up Balance
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Top Up Balance</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="row g-3" method="post" asp-action="TopUpBalance" asp-controller="Account">
+                        <label for="cardNumber" class="form-label">Enter card number:</label>
+                        <input type="text" class="form-control" name="cardNumber" placeholder="Number" required>
+                        <button type="submit" class="btn btn-primary mb-3">Top up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                        Ticket List
+                    </button>
+                </h2>
+                <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Film</th>
+                                    <th scope="col">Cinema</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Price</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Tickets.Select((value, index) => new { value, index }))
+                                {
+                                    <tr>
+                                        <th scope="row">@(item.index + 1)</th>
+                                        <td>@item.value.FilmName</td>
+                                        <td>@item.value.CinemaName</td>
+                                        <td>@item.value.Time</td>
+                                        <td>@item.value.Price</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
