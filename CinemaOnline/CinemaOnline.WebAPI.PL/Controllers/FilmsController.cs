@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CinemaOnline.BLL.Services.Interfaces;
-using CinemaOnline.WebAPI.PL.Models;
+using CinemaOnline.ModelsDTO.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 

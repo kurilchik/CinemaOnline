@@ -1,4 +1,4 @@
-﻿namespace CinemaOnline.WebAPI.PL.Models
+﻿namespace CinemaOnline.ModelsDTO.Models
 {
     public class UserDTO
     {

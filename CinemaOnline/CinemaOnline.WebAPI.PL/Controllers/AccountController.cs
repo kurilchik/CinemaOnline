@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
-using CinemaOnline.WebAPI.PL.Models;
+using CinemaOnline.ModelsDTO.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CinemaOnline.WebAPI.PL.Controllers

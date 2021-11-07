@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CinemaOnline.BLL\CinemaOnline.BLL.csproj" />
+    <ProjectReference Include="..\CinemaOnline.ModelsDTO\CinemaOnline.ModelsDTO.csproj" />
   </ItemGroup>
 
 </Project>

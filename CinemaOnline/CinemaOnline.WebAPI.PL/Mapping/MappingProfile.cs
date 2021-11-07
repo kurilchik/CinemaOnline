@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CinemaOnline.BLL.ViewModels;
-using CinemaOnline.WebAPI.PL.Models;
+using CinemaOnline.ModelsDTO.Models;
 
 namespace CinemaOnline.WebAPI.PL.Mapping
 {

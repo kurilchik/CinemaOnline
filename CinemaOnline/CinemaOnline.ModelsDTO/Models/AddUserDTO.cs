@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CinemaOnline.WebAPI.PL.Models
+﻿namespace CinemaOnline.ModelsDTO.Models
 {
     public class AddUserDTO
     {
