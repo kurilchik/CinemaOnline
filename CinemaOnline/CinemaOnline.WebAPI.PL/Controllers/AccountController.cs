@@ -2,10 +2,18 @@
 using CinemaOnline.BLL.Services.Interfaces;
 using CinemaOnline.BLL.ViewModels;
 using CinemaOnline.ModelsDTO.Models;
+using CinemaOnline.WebAPI.PL.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace CinemaOnline.WebAPI.PL.Controllers
 {
+    [Authorize]
     [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -85,6 +93,48 @@ namespace CinemaOnline.WebAPI.PL.Controllers
             {
                 return BadRequest();
             }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult SignIn([FromBody] GetUserDTO userDTO)
+        {
+            var identity = GetIdentity(userDTO.Email, userDTO.Password);
+            if (identity == null)
+            {
+                return BadRequest(new { errorText = "Invalid username or password." });
+            }
+
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+
+            return Ok(token);
+        }
+
+        private ClaimsIdentity GetIdentity(string email, string password)
+        {
+            var user = _userService.GetByEmail(email);
+
+            if (user != null && user.Password == password)
+            {
+                var claims = new List<Claim>
+                {
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email)
+                };
+                ClaimsIdentity claimsIdentity =
+                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+                return claimsIdentity;
+            }
+
+            return null;
         }
     }
 }
