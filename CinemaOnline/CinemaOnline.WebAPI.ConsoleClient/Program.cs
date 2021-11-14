@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CinemaOnline.WebAPI.ConsoleClient.Clients;
+using System;
 
 namespace CinemaOnline.WebAPI.ConsoleClient
 {
@@ -6,9 +7,8 @@ namespace CinemaOnline.WebAPI.ConsoleClient
     {
         static void Main(string[] args)
         {
-            Film film = new Film();
-            film.GetAllFilms();
-            film.GetFilmById();
+            AccountClient client = new AccountClient();
+            client.SignIn();
         }
     }
 }

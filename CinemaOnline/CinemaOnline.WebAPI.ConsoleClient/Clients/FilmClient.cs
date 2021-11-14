@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using System.Net;
 using System.Text;
 
-namespace CinemaOnline.WebAPI.ConsoleClient
+namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
-    public class Film
+    public class FilmClient
     {
         public void GetAllFilms()
         {
             using (var client = new WebClient())
             {
-                client.Headers.Add(Constants.ContentTypeHeader); 
+                client.Headers.Add(Constants.ContentTypeHeader);
                 client.Headers.Add(Constants.AcceptHeader);
                 var result = client.DownloadString($"{Constants.AppPath}Films");
                 var films = JsonConvert.DeserializeObject<List<FilmDTO>>(result);
@@ -31,7 +31,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient
             var filmId = Console.ReadLine();
             using (var client = new WebClient())
             {
-                client.Headers.Add(Constants.ContentTypeHeader); 
+                client.Headers.Add(Constants.ContentTypeHeader);
                 client.Headers.Add(Constants.AcceptHeader);
                 var result = client.DownloadString($"{Constants.AppPath}Films/{filmId}");
                 var film = JsonConvert.DeserializeObject<FilmDTO>(result);

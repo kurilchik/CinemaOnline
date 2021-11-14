@@ -97,25 +97,34 @@ namespace CinemaOnline.WebAPI.PL.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult SignIn([FromBody] GetUserDTO userDTO)
+        public IActionResult SignIn([FromBody] SignInModelDTO model)
         {
-            var identity = GetIdentity(userDTO.Email, userDTO.Password);
+            var identity = GetIdentity(model.Email, model.Password);
+
             if (identity == null)
             {
-                return BadRequest(new { errorText = "Invalid username or password." });
+                return BadRequest("Incorrect login and (or) password");
             }
 
-            var now = DateTime.UtcNow;
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var token = new JwtSecurityTokenHandler().WriteToken(jwt);
+            var token = GetToken(identity);
 
             return Ok(token);
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult SignUp([FromBody] SignUpModelDTO model)
+        {
+            var user = _userService.GetByEmail(model.Email);
+            if (user == null && model.Password == model.ConfirmPassword)
+            {
+                _userService.Add(new UserViewModel { Name = model.Name, Email = model.Email, Password = model.Password });
+                return Ok(model);
+            }
+            else
+            {
+                return BadRequest("Incorrect login and (or) password");
+            }
         }
 
         private ClaimsIdentity GetIdentity(string email, string password)
@@ -135,6 +144,19 @@ namespace CinemaOnline.WebAPI.PL.Controllers
             }
 
             return null;
+        }
+
+        private string GetToken(ClaimsIdentity identity)
+        {
+            var now = DateTime.UtcNow;
+            var jwt = new JwtSecurityToken(
+                    issuer: AuthOptions.ISSUER,
+                    audience: AuthOptions.AUDIENCE,
+                    notBefore: now,
+                    claims: identity.Claims,
+                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
+                    signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+            return new JwtSecurityTokenHandler().WriteToken(jwt);
         }
     }
 }
