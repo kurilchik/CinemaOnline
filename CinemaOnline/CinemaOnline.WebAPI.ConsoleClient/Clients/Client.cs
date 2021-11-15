@@ -1,4 +1,5 @@
 ﻿using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
+using System;
 
 namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
@@ -15,9 +16,40 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         public void Run()
         {
-            _accountClient.SignIn();
-            _filmClient.GetAllFilms();
-            _filmClient.GetFilmById();
+            Entry();
+        }
+
+        private void Entry()
+        {
+            Console.Clear();
+            Console.WriteLine("Enter <1> to login");
+            Console.WriteLine("Enter <2> to register");
+
+            int userChoice;
+            if (int.TryParse(Console.ReadLine(), out userChoice))
+            {
+                switch (userChoice)
+                {
+                    case 1: 
+                        _accountClient.SignIn();
+                        break;
+                    case 2:
+                        _accountClient.SignUp();
+                        break;
+                    default:
+                        Console.WriteLine("Something wrong!");
+                        Console.ReadKey();
+                        Entry();
+                        break;
+                }
+            }
+            else
+            {
+                Console.WriteLine("Something wrong!");
+                Console.ReadKey();
+                Entry();
+            }           
+            
         }
     }
 }
