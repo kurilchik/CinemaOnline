@@ -1,5 +1,6 @@
-﻿using CinemaOnline.WebAPI.ConsoleClient.Clients;
-using System;
+﻿using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
+using CinemaOnline.WebAPI.ConsoleClient.DependencyInjection;
+using SimpleInjector;
 
 namespace CinemaOnline.WebAPI.ConsoleClient
 {
@@ -7,8 +8,11 @@ namespace CinemaOnline.WebAPI.ConsoleClient
     {
         static void Main(string[] args)
         {
-            AccountClient client = new AccountClient();
-            client.SignIn();
+            var container = new Container();
+            Bootstrap.Start(container);
+
+            var client = container.GetInstance<IClient>();
+            client.Run();
         }
     }
 }

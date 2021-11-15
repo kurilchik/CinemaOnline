@@ -1,41 +1,52 @@
 ﻿using CinemaOnline.ModelsDTO.Models;
+using CinemaOnline.WebAPI.ConsoleClient.Authentication.Interfaces;
+using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
+using CinemaOnline.WebAPI.ConsoleClient.Constants;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
-using System.Text;
 
 namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
-    public class AccountClient
+    public class AccountClient : IAccountClient
     {
-        private string _token = string.Empty;
+        private IToken _token;
+
+        public AccountClient(IToken token)
+        {
+            _token = token;
+        }
 
         public void SignIn()
         {
+            Console.Clear();
             Console.WriteLine("Enter email:");
             var email = Console.ReadLine();
             Console.WriteLine("Enter password:");
             var password = Console.ReadLine();
+
             var model = new SignInModelDTO { Email = email, Password = password };
 
             using (var client = new WebClient())
             {
-                client.Headers.Add(Constants.ContentTypeHeader);
-                client.Headers.Add(Constants.AcceptHeader);
+                client.Headers.Add(ClientConstants.ContentTypeHeader);
+                client.Headers.Add(ClientConstants.AcceptHeader);
+
                 try
                 {
-                    var result = client.UploadString($"{Constants.AppPath}Account/SignIn", JsonConvert.SerializeObject(model));
-                    _token = $"Authorization:Bearer {JsonConvert.DeserializeObject<string>(result)}";
+                    var result = client.UploadString($"{ClientConstants.AppPath}Account/SignIn", JsonConvert.SerializeObject(model));
+                    _token.AuthorizationHeader = ClientConstants.AuthorizationHeader + JsonConvert.DeserializeObject<string>(result);
                 }
                 catch (WebException ex)
                 {
                     var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
                     Console.WriteLine(resp);
+
+                    Console.ReadKey();
+                    
                     SignIn();
-                }              
-                
+                }
             }
         }
     }
