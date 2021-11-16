@@ -1,15 +1,18 @@
 ﻿using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
+using CinemaOnline.WebAPI.ConsoleClient.ModelServices.Interfaces;
 using System;
 
 namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
     public class Client : IClient
     {
+        private IUserAuthorized _user;
         private IAccountClient _accountClient;
         private IFilmClient _filmClient;
 
-        public Client(IAccountClient accountClient, IFilmClient filmClient)
+        public Client(IUserAuthorized user, IAccountClient accountClient, IFilmClient filmClient)
         {
+            _user = user;
             _accountClient = accountClient;
             _filmClient = filmClient;
         }
@@ -17,7 +20,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
         public void Run()
         {
             Login();
-            TopUpBalance();
+            MainMenu();
         }
 
         private void Login()
@@ -34,37 +37,70 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             }
         }
 
-        private void TopUpBalance()
+        private void MainMenu()
         {
-            var userChoice = UserChoice("Enter <1> to top up balance", "Enter <2> to continue");
+            var userChoice = UserChoice("Enter <1> - Main menu", "Enter <2> - Account");
 
             if (userChoice == 1)
             {
-                Console.Clear();
-                Console.WriteLine("*Top up balance*");
-                Console.WriteLine("Enter amount:");
+                _filmClient.GetAllFilms();
+            }
+            else
+            {
+                Account();
+            }
+        }
 
-                float amount;
-                if (float.TryParse(Console.ReadLine(), out amount))
+        private void Account()
+        {
+            Console.Clear();
+            Console.WriteLine($"Name: {_user.User.Name}");
+            Console.WriteLine($"Email: {_user.User.Email}");
+            Console.WriteLine($"Password: {_user.User.Password}");
+            Console.WriteLine($"Balance: {_user.User.Balance} BYN");
+
+            Console.ReadKey();
+
+            var userChoice = UserChoice("Enter <1> to top up balance", "Enter <2> - Main menu");
+
+            if (userChoice == 1)
+            {
+                TopUpBalance();
+            }
+            else
+            {
+                MainMenu();
+            }
+        }
+
+        private void TopUpBalance()
+        {
+            Console.Clear();
+            Console.WriteLine("*Top up balance*");
+            Console.WriteLine("Enter amount:");
+
+            float amount;
+            if (float.TryParse(Console.ReadLine(), out amount))
+            {
+                if (amount > 0 && amount <= 100)
                 {
-                    if (amount > 0 && amount <= 100)
-                    {
-                        _accountClient.TopUpBalance(amount);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Are you crazy? No more than 100 BYN!");
-                        Console.ReadKey();
-                        TopUpBalance();
-                    }                    
+                    _accountClient.TopUpBalance(amount);
                 }
                 else
                 {
-                    Console.WriteLine("Wrong amount!");
+                    Console.WriteLine("Are you crazy? No more than 100 BYN!");
                     Console.ReadKey();
                     TopUpBalance();
                 }
             }
+            else
+            {
+                Console.WriteLine("Wrong amount!");
+                Console.ReadKey();
+                TopUpBalance();
+            }
+
+            Account();
         }
 
         private int UserChoice(string firstMessage, string secondMessage)

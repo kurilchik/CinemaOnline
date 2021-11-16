@@ -20,6 +20,8 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         public void GetAllFilms()
         {
+            Console.Clear();
+
             using (var client = new WebClient())
             {
                 client.Headers.Add(ClientConstants.ContentTypeHeader);
@@ -29,7 +31,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                 var films = JsonConvert.DeserializeObject<List<FilmDTO>>(result);
                 foreach (var item in films)
                 {
-                    Console.WriteLine($"FilmId: {item.Id}{Environment.NewLine}Name: {item.Name}{Environment.NewLine}");
+                    Console.WriteLine($"{item.Id}. - Name: {item.Name}{Environment.NewLine}");
                 }
                 Console.ReadKey();
             }
