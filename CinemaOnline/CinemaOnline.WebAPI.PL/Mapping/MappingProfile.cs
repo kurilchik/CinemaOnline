@@ -12,8 +12,6 @@ namespace CinemaOnline.WebAPI.PL.Mapping
 
             CreateMap<UserViewModel, UserDTO>();
 
-            CreateMap<AddUserDTO, UserViewModel>();
-
             CreateMap<UpdateUserDTO, UserViewModel>();
         }
     }

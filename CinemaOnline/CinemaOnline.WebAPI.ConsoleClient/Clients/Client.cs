@@ -21,35 +21,35 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         private void Entry()
         {
-            Console.Clear();
-            Console.WriteLine("Enter <1> to login");
-            Console.WriteLine("Enter <2> to register");
+            var userChoice = UserChoice("Enter <1> to login", "Enter <2> to register");
 
-            int userChoice;
-            if (int.TryParse(Console.ReadLine(), out userChoice))
+            if (userChoice == 1)
             {
-                switch (userChoice)
-                {
-                    case 1: 
-                        _accountClient.SignIn();
-                        break;
-                    case 2:
-                        _accountClient.SignUp();
-                        break;
-                    default:
-                        Console.WriteLine("Something wrong!");
-                        Console.ReadKey();
-                        Entry();
-                        break;
-                }
+                _accountClient.SignIn();
             }
             else
             {
-                Console.WriteLine("Something wrong!");
+                _accountClient.SignUp();
+            }
+        }
+
+        private int UserChoice(string firstMessage, string secondMessage)
+        {
+            Console.Clear();
+            Console.WriteLine(firstMessage);
+            Console.WriteLine(secondMessage);
+
+            int userChoice;
+            if (int.TryParse(Console.ReadLine(), out userChoice) && userChoice == 1 || userChoice == 2)
+            {
+                return userChoice;
+            }
+            else
+            {
+                Console.WriteLine("Choose <1> or <2>");
                 Console.ReadKey();
-                Entry();
-            }           
-            
+                return UserChoice(firstMessage, secondMessage);
+            }
         }
     }
 }

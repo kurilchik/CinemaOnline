@@ -63,30 +63,29 @@ namespace CinemaOnline.WebAPI.PL.Controllers
         public IActionResult GetUser([FromBody] GetUserDTO userDTO)
         {
             var user = _userService.GetByEmail(userDTO.Email);
-            if (user != null && user.Password == userDTO.Password)
+            if (user != null)
             {
                 var model = _mapper.Map<UserDTO>(user);
                 return Ok(model);
             }
             else
             {
-                return BadRequest();
+                return BadRequest("User not found!");
             }
-
         }
 
         [HttpPut]
         public IActionResult UpdateBalance([FromBody] UpdateUserDTO userDTO)
         {
-            var user = _userService.GetByEmail(userDTO.Email);
-            if (user != null && user.Password == userDTO.Password)
+            try
             {
                 _userService.Update(_mapper.Map<UserViewModel>(userDTO));
                 return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                return BadRequest();
+                var message = ex.Message;
+                return BadRequest(message);
             }
         }
 

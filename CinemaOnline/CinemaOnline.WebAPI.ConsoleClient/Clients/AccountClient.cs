@@ -42,7 +42,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                     var result = client.UploadString($"{ClientConstants.AppPath}Account/SignIn", JsonConvert.SerializeObject(model));
                     _token.AuthorizationHeader = ClientConstants.AuthorizationHeader + JsonConvert.DeserializeObject<string>(result);
 
-                    GetUser(model.Email, model.Password);
+                    GetUser(model.Email);
 
                     Console.Clear();
                     Console.WriteLine($"{_user.User.Name}, Welcom to CinemaOnline");
@@ -102,37 +102,9 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             }
         }
 
-        public void TopUpBalance(float amount)
+        private void GetUser(string email)
         {
-            _user.User.Balance += amount;
-            var model = new UpdateUserDTO { Email = _user.User.Email, Password = _user.User.Password, Balance = _user.User.Balance };
-
-            using (var client = new WebClient())
-            {
-                client.Headers.Add(ClientConstants.ContentTypeHeader);
-                client.Headers.Add(ClientConstants.AcceptHeader);
-                client.Headers.Add(_token.AuthorizationHeader);
-
-                try
-                {
-                    var result = client.UploadString($"{ClientConstants.AppPath}Account/UpdateBalance", WebRequestMethods.Http.Put, JsonConvert.SerializeObject(model));
-
-                    Console.WriteLine($"The balance is topped up by {amount} BYN.");
-                    Console.ReadKey();
-                }
-                catch (WebException ex)
-                {
-                    var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
-
-                    Console.WriteLine(resp);
-                    Console.ReadKey();
-                }
-            }
-        }
-
-        private void GetUser(string email, string password)
-        {
-            var model = new GetUserDTO { Email = email, Password = password };
+            var model = new GetUserDTO { Email = email };
 
             using (var client = new WebClient())
             {
@@ -155,6 +127,34 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                     Console.ReadKey();
                 }
             }
-        }        
+        }
+
+        public void TopUpBalance(float amount)
+        {
+            _user.User.Balance += amount;
+            var model = new UpdateUserDTO { Email = _user.User.Email, Balance = _user.User.Balance };
+
+            using (var client = new WebClient())
+            {
+                client.Headers.Add(ClientConstants.ContentTypeHeader);
+                client.Headers.Add(ClientConstants.AcceptHeader);
+                client.Headers.Add(_token.AuthorizationHeader);
+
+                try
+                {
+                    var result = client.UploadString($"{ClientConstants.AppPath}Account/UpdateBalance", WebRequestMethods.Http.Put, JsonConvert.SerializeObject(model));
+
+                    Console.WriteLine($"The balance is topped up by {amount} BYN.");
+                    Console.ReadKey();
+                }
+                catch (WebException ex)
+                {
+                    var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+
+                    Console.WriteLine(resp);
+                    Console.ReadKey();
+                }
+            }
+        }               
     }
 }
