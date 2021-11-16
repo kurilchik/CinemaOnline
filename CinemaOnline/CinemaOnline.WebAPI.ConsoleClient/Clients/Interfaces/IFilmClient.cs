@@ -3,6 +3,6 @@
     public interface IFilmClient
     {
         void GetAllFilms();
-        void GetFilmById();
+        void GetFilmById(int filmId);
     }
 }

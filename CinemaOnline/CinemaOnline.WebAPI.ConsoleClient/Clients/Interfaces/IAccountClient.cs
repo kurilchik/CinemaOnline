@@ -4,6 +4,7 @@
     {
         void SignIn();
         void SignUp();
+        void GetUser(string email);
         void TopUpBalance(float amount);
     }
 }

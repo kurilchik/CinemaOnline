@@ -2,6 +2,7 @@
 using CinemaOnline.WebAPI.ConsoleClient.Authentication.Interfaces;
 using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
 using CinemaOnline.WebAPI.ConsoleClient.Constants;
+using CinemaOnline.WebAPI.ConsoleClient.ModelServices.Interfaces;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,12 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
     public class FilmClient : IFilmClient
     {
+        private IFilmSelected _film;
         private IToken _token;
 
-        public FilmClient(IToken token)
+        public FilmClient(IFilmSelected film, IToken token)
         {
+            _film = film;
             _token = token;
         }
 
@@ -31,16 +34,14 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                 var films = JsonConvert.DeserializeObject<List<FilmDTO>>(result);
                 foreach (var item in films)
                 {
-                    Console.WriteLine($"{item.Id}. - Name: {item.Name}{Environment.NewLine}");
-                }
-                Console.ReadKey();
+                    Console.WriteLine($"{item.Id}. - {item.Name}{Environment.NewLine}");
+                }                
             }
         }
 
-        public void GetFilmById()
+        public void GetFilmById(int filmId)
         {
-            Console.WriteLine("Please enter filmID:");
-            var filmId = Console.ReadLine();
+            Console.Clear();
             using (var client = new WebClient())
             {
                 client.Headers.Add(ClientConstants.ContentTypeHeader);
@@ -48,8 +49,10 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                 client.Headers.Add(_token.AuthorizationHeader);
                 var result = client.DownloadString($"{ClientConstants.AppPath}Films/{filmId}");
                 var film = JsonConvert.DeserializeObject<FilmDTO>(result);
-                Console.WriteLine($"FilmId: {film.Id}{Environment.NewLine}Name: {film.Name}{Environment.NewLine}Genres: {string.Join(", ", film.Genres)}{Environment.NewLine}");
-                Console.ReadKey();
+
+                _film.Film = film;
+
+                Console.WriteLine($"Name: {film.Name}{Environment.NewLine}Genres: {string.Join(", ", film.Genres)}{Environment.NewLine}Description: {film.Description}{Environment.NewLine}");
             }
         }
     }

@@ -7,12 +7,14 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
     public class Client : IClient
     {
         private IUserAuthorized _user;
+        private IFilmSelected _film;
         private IAccountClient _accountClient;
         private IFilmClient _filmClient;
 
-        public Client(IUserAuthorized user, IAccountClient accountClient, IFilmClient filmClient)
+        public Client(IUserAuthorized user, IFilmSelected film, IAccountClient accountClient, IFilmClient filmClient)
         {
             _user = user;
+            _film = film;
             _accountClient = accountClient;
             _filmClient = filmClient;
         }
@@ -43,7 +45,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
             if (userChoice == 1)
             {
-                _filmClient.GetAllFilms();
+                Films();
             }
             else
             {
@@ -51,8 +53,28 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             }
         }
 
-        private void Account()
+        private void Films()
         {
+            _filmClient.GetAllFilms();
+
+            Console.WriteLine("Please enter the film number:");
+            int userChoice;
+            if (int.TryParse(Console.ReadLine(), out userChoice))
+            {
+                _filmClient.GetFilmById(userChoice);
+            }
+            else
+            {
+                Console.WriteLine("Wrong number!");
+                Films();
+            }
+
+        }
+
+        private void Account()
+        {            
+            _accountClient.GetUser(_user.User.Email);
+
             Console.Clear();
             Console.WriteLine($"Name: {_user.User.Name}");
             Console.WriteLine($"Email: {_user.User.Email}");

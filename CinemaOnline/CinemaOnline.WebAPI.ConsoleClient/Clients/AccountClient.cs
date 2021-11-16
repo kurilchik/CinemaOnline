@@ -101,7 +101,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             }
         }
 
-        private void GetUser(string email)
+        public void GetUser(string email)
         {
             var model = new GetUserDTO { Email = email };
 
