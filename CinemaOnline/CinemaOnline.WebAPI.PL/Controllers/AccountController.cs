@@ -20,11 +20,13 @@ namespace CinemaOnline.WebAPI.PL.Controllers
     {
         private IUserService _userService;
         private IMapper _mapper;
+        private ITicketService _ticketService;
 
-        public AccountController(IUserService userService, IMapper mapper)
+        public AccountController(IUserService userService, IMapper mapper, ITicketService ticketService)
         {
             _userService = userService;
             _mapper = mapper;
+            _ticketService = ticketService;
         }
 
         [AllowAnonymous]
@@ -86,6 +88,23 @@ namespace CinemaOnline.WebAPI.PL.Controllers
             {
                 var message = ex.Message;
                 return BadRequest(message);
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Buy([FromBody] TicketDTO ticket)
+        {
+            var user = _userService.GetByEmail(ticket.Email);
+            if (user.Balance >= ticket.Price)
+            {
+                user.Balance -= ticket.Price;
+                _userService.Update(user);
+                _ticketService.Add(user.Id, ticket.SessionId);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest();
             }
         }
 

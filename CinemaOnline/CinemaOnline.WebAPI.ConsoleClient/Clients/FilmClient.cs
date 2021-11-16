@@ -48,7 +48,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                 client.Headers.Add(ClientConstants.AcceptHeader);
                 client.Headers.Add(_token.AuthorizationHeader);
                 var result = client.DownloadString($"{ClientConstants.AppPath}Films/{filmId}");
-                var film = JsonConvert.DeserializeObject<FilmDTO>(result);
+                var film = JsonConvert.DeserializeObject<FilmSessionDTO>(result);
 
                 _film.Film = film;
 

@@ -13,12 +13,12 @@ namespace CinemaOnline.WebAPI.PL.Controllers
     public class FilmsController : ControllerBase
     {
         private readonly IMapper _mapper;
-        private IFilmService _filmService;
+        private IFilmService _filmService;        
 
         public FilmsController(IFilmService filmService, IMapper mapper)
         {
             _filmService = filmService;
-            _mapper = mapper;
+            _mapper = mapper;            
         }
 
         [AllowAnonymous]
@@ -34,7 +34,8 @@ namespace CinemaOnline.WebAPI.PL.Controllers
         public IActionResult GetFilms(int id)
         {
             var film = _filmService.GetFilmById(id);
-            var model = _mapper.Map<FilmDTO>(film);
+            film = _filmService.GetSessions(film);
+            var model = _mapper.Map<FilmSessionDTO>(film);
             return Ok(model);
         }
     }

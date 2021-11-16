@@ -10,6 +10,10 @@ namespace CinemaOnline.WebAPI.PL.Mapping
         {
             CreateMap<FilmViewModel, FilmDTO>();
 
+            CreateMap<FilmViewModel, FilmSessionDTO>();
+
+            CreateMap<SessionViewModel, SessionDTO>();
+
             CreateMap<UserViewModel, UserDTO>();
 
             CreateMap<UpdateUserDTO, UserViewModel>();

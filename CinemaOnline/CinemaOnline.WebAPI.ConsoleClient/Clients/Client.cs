@@ -1,6 +1,7 @@
 ﻿using CinemaOnline.WebAPI.ConsoleClient.Clients.Interfaces;
 using CinemaOnline.WebAPI.ConsoleClient.ModelServices.Interfaces;
 using System;
+using System.Linq;
 
 namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 {
@@ -62,6 +63,17 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             if (int.TryParse(Console.ReadLine(), out userChoice))
             {
                 _filmClient.GetFilmById(userChoice);
+
+                var choice = UserChoice("Enter <1> to view sessions", "Enter <2> - Main menu");
+
+                if (choice == 1)
+                {
+                    Sessions();
+                }
+                else
+                {
+                    MainMenu();
+                }
             }
             else
             {
@@ -69,6 +81,28 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                 Films();
             }
 
+        }
+
+        private void Sessions()
+        {
+            var sessions = _film.Film.Sessions.Select((value, index) => new { value, index });            
+
+            foreach (var item in sessions)
+            {
+                Console.WriteLine($"{item.index}. - {item.value.CinemaName}: {item.value.Time}. {item.value.Price}BYN.");
+            }
+
+            Console.WriteLine("Please enter the session number:");
+            int userChoice;
+            if (int.TryParse(Console.ReadLine(), out userChoice))
+            {
+                var sessionId = sessions.Where(v => v.index == userChoice).Select(s => s.value.Id).FirstOrDefault();
+            }
+            else
+            {
+                Console.Clear();
+                Sessions();
+            }
         }
 
         private void Account()
@@ -127,7 +161,7 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         private int UserChoice(string firstMessage, string secondMessage)
         {
-            Console.Clear();
+            //Console.Clear();
             Console.WriteLine(firstMessage);
             Console.WriteLine(secondMessage);
 
