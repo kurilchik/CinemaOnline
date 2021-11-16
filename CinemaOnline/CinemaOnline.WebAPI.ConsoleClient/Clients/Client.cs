@@ -16,10 +16,11 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         public void Run()
         {
-            Entry();
+            Login();
+            TopUpBalance();
         }
 
-        private void Entry()
+        private void Login()
         {
             var userChoice = UserChoice("Enter <1> to login", "Enter <2> to register");
 
@@ -30,6 +31,39 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             else
             {
                 _accountClient.SignUp();
+            }
+        }
+
+        private void TopUpBalance()
+        {
+            var userChoice = UserChoice("Enter <1> to top up balance", "Enter <2> to continue");
+
+            if (userChoice == 1)
+            {
+                Console.Clear();
+                Console.WriteLine("*Top up balance*");
+                Console.WriteLine("Enter amount:");
+
+                float amount;
+                if (float.TryParse(Console.ReadLine(), out amount))
+                {
+                    if (amount > 0 && amount <= 100)
+                    {
+                        _accountClient.TopUpBalance(amount);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Are you crazy? No more than 100 BYN!");
+                        Console.ReadKey();
+                        TopUpBalance();
+                    }                    
+                }
+                else
+                {
+                    Console.WriteLine("Wrong amount!");
+                    Console.ReadKey();
+                    TopUpBalance();
+                }
             }
         }
 

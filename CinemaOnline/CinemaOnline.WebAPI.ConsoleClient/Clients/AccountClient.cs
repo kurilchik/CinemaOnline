@@ -24,11 +24,11 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
         public void SignIn()
         {
             Console.Clear();
-            Console.WriteLine("<Login>");
+            Console.WriteLine("*Login*");
             Console.WriteLine("Enter email:");
             var email = Console.ReadLine();
             Console.WriteLine("Enter password:");
-            var password = Console.ReadLine();
+            var password = ReadPassword();
 
             var model = new SignInModelDTO { Email = email, Password = password };
 
@@ -63,15 +63,15 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
         public void SignUp()
         {
             Console.Clear();
-            Console.WriteLine("<Sign up>");
+            Console.WriteLine("*Sign up*");
             Console.WriteLine("Enter name:");
             var name = Console.ReadLine();
             Console.WriteLine("Enter email:");
             var email = Console.ReadLine();
             Console.WriteLine("Enter password:");
-            var password = Console.ReadLine();
+            var password = ReadPassword();
             Console.WriteLine("Enter confirm password:");
-            var confirmPassword = Console.ReadLine();
+            var confirmPassword = ReadPassword();
 
             var model = new SignUpModelDTO { Name = name, Email = email, Password = password, ConfirmPassword = confirmPassword };
 
@@ -85,7 +85,6 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                     var result = client.UploadString($"{ClientConstants.AppPath}Account/SignUp", JsonConvert.SerializeObject(model));
 
                     Console.WriteLine("Registration completed successfully!");
-
                     Console.ReadKey();
 
                     SignIn();
@@ -155,6 +154,34 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
                     Console.ReadKey();
                 }
             }
-        }               
+        }
+
+        private string ReadPassword()
+        {
+            string password = String.Empty;
+            ConsoleKeyInfo info = Console.ReadKey(true);
+            while (info.Key != ConsoleKey.Enter)
+            {
+                if (info.Key != ConsoleKey.Backspace)
+                {
+                    Console.Write("*");
+                    password += info.KeyChar;
+                }
+                else if (info.Key == ConsoleKey.Backspace)
+                {
+                    if (!string.IsNullOrEmpty(password))
+                    {
+                        password = password.Substring(0, password.Length - 1);
+                        int pos = Console.CursorLeft;
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                        Console.Write(" ");
+                        Console.SetCursorPosition(pos - 1, Console.CursorTop);
+                    }
+                }
+                info = Console.ReadKey(true);
+            }
+            Console.WriteLine();
+            return password;
+        }
     }
 }
