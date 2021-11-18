@@ -128,6 +128,31 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             }
         }
 
+        public void BuyTicket(int sessionId, float price)
+        {
+            var model = new TicketDTO { Email = _user.User.Email,  SessionId = sessionId, Price = price};
+
+            using (var client = new WebClient())
+            {
+                client.Headers.Add(ClientConstants.ContentTypeHeader);
+                client.Headers.Add(ClientConstants.AcceptHeader);
+                client.Headers.Add(_token.AuthorizationHeader);
+
+                try
+                {
+                    var result = client.UploadString($"{ClientConstants.AppPath}Account/Buy", JsonConvert.SerializeObject(model));
+                    Console.WriteLine("Ticket purchased successfully!");
+                }
+                catch (WebException ex)
+                {
+                    var resp = new StreamReader(ex.Response.GetResponseStream()).ReadToEnd();
+
+                    Console.WriteLine(resp);
+                    Console.ReadKey();
+                }
+            }
+        }
+
         public void TopUpBalance(float amount)
         {
             _user.User.Balance += amount;

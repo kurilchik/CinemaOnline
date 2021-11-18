@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace CinemaOnline.ModelsDTO.Models
+﻿namespace CinemaOnline.ModelsDTO.Models
 {
     public class TicketDTO
     {

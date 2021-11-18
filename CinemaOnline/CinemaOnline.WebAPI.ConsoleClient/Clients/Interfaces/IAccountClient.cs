@@ -5,6 +5,7 @@
         void SignIn();
         void SignUp();
         void GetUser(string email);
+        void BuyTicket(int sessionId, float price);
         void TopUpBalance(float amount);
     }
 }

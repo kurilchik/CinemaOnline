@@ -96,7 +96,15 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
             int userChoice;
             if (int.TryParse(Console.ReadLine(), out userChoice))
             {
-                var sessionId = sessions.Where(v => v.index == userChoice).Select(s => s.value.Id).FirstOrDefault();
+                var session = sessions.Where(v => v.index == userChoice).Select(s => new { s.value.Id, s.value.Price }).FirstOrDefault();
+                _accountClient.BuyTicket(session.Id, session.Price);
+
+                var choice = UserChoice("Enter <1> - Main menu", "Enter <2> - Exit");
+
+                if (choice == 1)
+                {
+                    MainMenu();
+                }
             }
             else
             {
