@@ -42,7 +42,9 @@ namespace CinemaOnline.WebAPI.ConsoleClient.Clients
 
         private void MainMenu()
         {
-            var userChoice = UserChoice("Enter <1> - Main menu", "Enter <2> - Account");
+            Console.Clear();
+
+            var userChoice = UserChoice("Enter <1> - Films", "Enter <2> - Account");
 
             if (userChoice == 1)
             {
